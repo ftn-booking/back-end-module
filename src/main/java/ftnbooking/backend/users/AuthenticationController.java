@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +37,16 @@ public class AuthenticationController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
 		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
+
+	@PutMapping
+	public ResponseEntity<?> changePassword(Principal principal,
+			@RequestBody @Valid ChangePasswordDTO passwordDto) {
+		boolean result = userService.changePassword(principal.getName(), passwordDto);
+		if(result)
+			return new ResponseEntity<>(HttpStatus.OK);
+
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 
 }

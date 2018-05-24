@@ -41,4 +41,16 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public boolean changePassword(String email, ChangePasswordDTO passwordDto) {
+		ApplicationUser user = findOne(email);
+		if(!bCryptPasswordEncoder.matches(passwordDto.getOldPassword(), user.getPassword()))
+			return false;
+
+		user.setPassword(bCryptPasswordEncoder.encode(passwordDto.getNewPassword()));
+		user = userRepository.save(user);
+		return true;
+	}
 }

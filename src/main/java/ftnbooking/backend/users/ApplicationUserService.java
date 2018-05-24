@@ -12,4 +12,6 @@ public interface ApplicationUserService {
 
 	ApplicationUser add(ApplicationUser user);
 
+	boolean changePassword(String email, ChangePasswordDTO passwordDto);
+
 }
