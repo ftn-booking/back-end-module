@@ -8,10 +8,14 @@ public interface ApplicationUserService {
 
 	ApplicationUser findOne(String email);
 
+	ApplicationUser findByResetToken(String token);
+
 	List<ApplicationUser> findAll();
 
 	ApplicationUser add(ApplicationUser user);
 
 	boolean changePassword(String email, ChangePasswordDTO passwordDto);
+
+	String resetPassword(ApplicationUser forUser);
 
 }

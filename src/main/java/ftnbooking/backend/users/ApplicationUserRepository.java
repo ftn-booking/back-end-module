@@ -8,4 +8,6 @@ public interface ApplicationUserRepository extends JpaRepository<ApplicationUser
 
 	ApplicationUser findByEmail(String email);
 
+	ApplicationUser findByResetToken(String token);
+
 }

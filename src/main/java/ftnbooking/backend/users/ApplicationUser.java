@@ -1,5 +1,7 @@
 package ftnbooking.backend.users;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -50,6 +52,9 @@ public class ApplicationUser {
 	@Enumerated(EnumType.STRING)
 	@JsonProperty(access = Access.READ_ONLY)
 	private ApplicationUserType userType = ApplicationUserType.VISITOR;
+
+	@JsonProperty(access = Access.READ_ONLY)
+	private String resetToken = UUID.randomUUID().toString();
 
 	public ApplicationUser() {}
 
@@ -137,6 +142,14 @@ public class ApplicationUser {
 
 	public void setUserType(ApplicationUserType userType) {
 		this.userType = userType;
+	}
+
+	public String getResetToken() {
+		return resetToken;
+	}
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
 	}
 
 }

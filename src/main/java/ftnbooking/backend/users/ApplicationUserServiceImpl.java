@@ -1,6 +1,7 @@
 package ftnbooking.backend.users;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,6 +25,11 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 	@Override
 	public ApplicationUser findOne(String email) {
 		return userRepository.findByEmail(email);
+	}
+
+	@Override
+	public ApplicationUser findByResetToken(String token) {
+		return userRepository.findByResetToken(token);
 	}
 
 	@Override
@@ -53,4 +59,14 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 		user = userRepository.save(user);
 		return true;
 	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public String resetPassword(ApplicationUser forUser) {
+		String newPassword = UUID.randomUUID().toString();
+		forUser.setPassword(bCryptPasswordEncoder.encode(newPassword));
+		userRepository.save(forUser);
+		return newPassword;
+	}
+
 }
