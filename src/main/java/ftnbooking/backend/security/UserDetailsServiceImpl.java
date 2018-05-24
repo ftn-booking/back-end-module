@@ -1,7 +1,6 @@
 package ftnbooking.backend.security;
 
-import static java.util.Collections.emptyList;
-
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,7 +25,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (applicationUser == null) {
 			throw new UsernameNotFoundException(username);
 		}
-		return new User(applicationUser.getEmail(), applicationUser.getPassword(), emptyList());
+		return new User(applicationUser.getEmail(),
+				applicationUser.getPassword(),
+				AuthorityUtils.createAuthorityList(applicationUser.getUserType().toString()));
 	}
 
 }
