@@ -22,6 +22,11 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 	}
 
 	@Override
+	public ApplicationUser findOne(String email) {
+		return userRepository.findByEmail(email);
+	}
+
+	@Override
 	public List<ApplicationUser> findAll() {
 		return userRepository.findAll();
 	}
