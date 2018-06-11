@@ -38,6 +38,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST, SecurityConstants.REGISTRATION_URL).permitAll()
 				.antMatchers(SecurityConstants.REGISTRATION_URL + "/reset/**").permitAll()
 				.antMatchers("/h2/**").permitAll()
+				.antMatchers(HttpMethod.GET).permitAll()
 				.anyRequest().authenticated()
 			.and()
 			.addFilter(new JWTAuthenticationFilter(authenticationManager()))
