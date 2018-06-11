@@ -16,6 +16,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import ftnbooking.backend.users.ApplicationUser;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="Accomodation")
 @Entity
@@ -52,5 +54,6 @@ public class Accomodation {
 	private AccomodationCategory accomodationCategory;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    private List<Agent> agent;
+    @XmlElement(name = "Agent", required = true)
+    private List<ApplicationUser> agent;
 }
