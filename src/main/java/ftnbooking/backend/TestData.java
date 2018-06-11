@@ -5,6 +5,10 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import ftnbooking.backend.lodgings.FoodServiceType;
+import ftnbooking.backend.lodgings.Lodging;
+import ftnbooking.backend.lodgings.LodgingService;
+import ftnbooking.backend.lodgings.LodgingType;
 import ftnbooking.backend.users.ApplicationUser;
 import ftnbooking.backend.users.ApplicationUserService;
 import ftnbooking.backend.users.ApplicationUserType;
@@ -14,6 +18,8 @@ public class TestData {
 
 	@Autowired
 	private ApplicationUserService userService;
+	@Autowired
+	private LodgingService lodgingService;
 
 	@PostConstruct
 	private void init() {
@@ -44,5 +50,31 @@ public class TestData {
 		ApplicationUser user7 = new ApplicationUser("sys@me", "qweqwe", "Sheev", "Palpatine", "Naboo", null);
 		user7.setUserType(ApplicationUserType.ADMIN);
 		userService.add(user7);
+
+		Lodging lodging1 = new Lodging("Lodging",
+				"Test lodging 1",
+				4,
+				LodgingType.APARTMENT,
+				2,
+				true,
+				true,
+				false,
+				false,
+				true,
+				FoodServiceType.FULL_BOARD);
+		lodgingService.add(lodging1);
+
+		Lodging lodging2 = new Lodging("Tourist Inn",
+				"Calm place for family",
+				3,
+				LodgingType.B_AND_B,
+				3,
+				true,
+				false,
+				false,
+				true,
+				true,
+				FoodServiceType.BREAKFAST);
+		lodgingService.add(lodging2);
 	}
 }
