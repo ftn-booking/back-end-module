@@ -1,4 +1,4 @@
-package ftn.booking.agent;
+package ftnbooking.backend.agent;
 
 import java.math.BigDecimal;
 import java.sql.Date;

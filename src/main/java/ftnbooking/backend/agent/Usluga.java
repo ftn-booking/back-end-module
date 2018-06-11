@@ -1,71 +1,70 @@
-package ftn.booking.agent;
+package ftnbooking.backend.agent;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "name",
-    "data"
+
 })
+@XmlRootElement(name = "Usluga")
 @Entity
-public  class Slika {
+public class Usluga {
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-	
     @XmlElement(required = true)
     private String name;
     
-    @XmlElement(required = true)
-    private byte[] data;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Accomodation accomodation;
-    
-    public Slika() {
+    @OneToMany(mappedBy = "Usluga", cascade = CascadeType.REMOVE)
+    public List<PonudjenaUsluga> ponudjenaUsluga;
+
+
+    public Usluga() {
     	
     }
+
 
 	public Long getId() {
 		return id;
 	}
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	public String getName() {
 		return name;
 	}
 
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public byte[] getData() {
-		return data;
+
+	public List<PonudjenaUsluga> getPonudjenaUsluga() {
+		return ponudjenaUsluga;
 	}
 
-	public void setData(byte[] data) {
-		this.data = data;
-	}
 
-	public Accomodation getAccomodation() {
-		return accomodation;
+	public void setPonudjenaUsluga(List<PonudjenaUsluga> ponudjenaUsluga) {
+		this.ponudjenaUsluga = ponudjenaUsluga;
 	}
-
-	public void setAccomodation(Accomodation accomodation) {
-		this.accomodation = accomodation;
-	}
-
+    
     
 }

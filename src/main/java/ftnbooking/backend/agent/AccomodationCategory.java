@@ -1,4 +1,4 @@
-package ftn.booking.agent;
+package ftnbooking.backend.agent;
 
 import java.util.List;
 
@@ -17,18 +17,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
 })
 @Entity
-public class AccomodationType {
+public class AccomodationCategory {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 	
 	@XmlElement(required = true)
-    private String name;
+    private String category;
 	
 	@OneToMany(mappedBy = "AccomodationCategory", cascade = CascadeType.REMOVE)
 	private List<Accomodation> accomodations;
 	
-	public AccomodationType() {
+	public AccomodationCategory() {
 		
 	}
 
@@ -40,12 +40,12 @@ public class AccomodationType {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public List<Accomodation> getAccomodations() {
@@ -57,5 +57,4 @@ public class AccomodationType {
 	}
 	
 	
-
 }

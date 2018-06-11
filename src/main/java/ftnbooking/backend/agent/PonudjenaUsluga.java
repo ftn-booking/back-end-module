@@ -1,4 +1,4 @@
-package ftn.booking.agent;
+package ftnbooking.backend.agent;
 
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
