@@ -9,6 +9,8 @@
             <xs:sequence>
                 <xs:element name="id" type="xs:long"/>
                 <xs:element name="dateOfReservation" type="xs:date"/>
+                <xs:element name="dateFrom" type="xs:date"/>
+                <xs:element name="dateOfReservation" type="xs:date"/>
                 <xs:element name="numberOfBeds" type="xs:integer"/>
                 <xs:element name="realized" type="xs:boolean"/>
                 <xs:element ref="au:ApplicationUser"/>
