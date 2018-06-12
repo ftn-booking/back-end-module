@@ -10,10 +10,19 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+    
+})
+@XmlRootElement(name = "Lodging")
 @Entity
 public class Lodging {
 
@@ -25,33 +34,49 @@ public class Lodging {
 	@Version
 	private Long version;
 
+	@XmlElement(required = true)
 	@Pattern(regexp = "(?U)[\\p{Alpha}\\h]*")
 	@NotBlank
 	private String name;
 
+	@XmlElement(required = true)
 	@NotBlank
 	private String description;
 
+	@XmlElement(required = true)
 	@Max(5)
 	@Min(0)
 	private int category;
 
+	@XmlElement(required = true)
 	@Enumerated(EnumType.STRING)
 	private LodgingType type;
 
+	@XmlElement(required = true)
 	@Max(5)
 	@Min(1)
 	private Integer rating;
 
+	@XmlElement(required = true)
 	@Min(1)
 	private int numberOfBeds;
 
+	@XmlElement(required = true)
 	private boolean hasParking;
+	
+	@XmlElement(required = true)
 	private boolean hasWifi;
+	
+	@XmlElement(required = true)
 	private boolean hasTv;
+	
+	@XmlElement(required = true)
 	private boolean hasKitchen;
+	
+	@XmlElement(required = true)
 	private boolean hasBathroom;
 
+	@XmlElement(required = true)
 	@Enumerated(EnumType.STRING)
 	private FoodServiceType foodServiceType;
 

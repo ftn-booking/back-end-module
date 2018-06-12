@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://xml.ws/reservation" xmlns:au="http://xml.ws/applicationUser"
+    xmlns:rs="http://xml.ws/reservation">
+
+    <xs:import namespace="http://xml.ws/applicationUser" schemaLocation="ApplicationUser.xsd"/>
+    <xs:element name="Reservation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="dateOfReservation" type="xs:date"/>
+                <xs:element name="numberOfBeds" type="xs:integer"/>
+                <xs:element name="realized" type="xs:boolean"/>
+                <xs:element ref="au:ApplicationUser"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

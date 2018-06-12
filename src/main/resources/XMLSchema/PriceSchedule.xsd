@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://xml.ws/priceSchedule" xmlns:ps="http://xml.ws/priceSchedule">
+
+    <xs:element name="PriceSchedule">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="dateFrom" type="xs:date"/>
+                <xs:element name="dateTo" type="xs:date"/>
+                <xs:element name="price" type="xs:integer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

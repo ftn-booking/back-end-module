@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://xml.ws/lodging" xmlns:img="http://xml.ws/image"
+    xmlns:l="http://xml.ws/lodging" xmlns:ps="http://xml.ws/priceSchedule"
+    xmlns:rs="http://xml.ws/reservation">
+
+    <xs:import namespace="http://xml.ws/image" schemaLocation="Image.xsd"/>
+    <xs:import namespace="http://xml.ws/priceSchedule" schemaLocation="PriceSchedule.xsd"/>
+    <xs:import namespace="http://xml.ws/reservation" schemaLocation="Reservation.xsd"/>
+    <xs:element name="Lodging">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="description" type="xs:string"/>
+                <xs:element name="category">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                            <xs:minInclusive value="0"/>
+                            <xs:maxInclusive value="5"/>
+                            <xs:pattern value="[\-+]?[0-9]+"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="type" type="xs:string"/>
+                <xs:element name="rating">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:double">
+                            <xs:minInclusive value="1"/>
+                            <xs:maxInclusive value="5"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="numberOfBeds">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                            <xs:minInclusive value="1"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="hasParking" type="xs:boolean"/>
+                <xs:element name="hasWifi" type="xs:boolean"/>
+                <xs:element name="hasTv" type="xs:boolean"/>
+                <xs:element name="hasKitchen" type="xs:boolean"/>
+                <xs:element name="hasBathroom" type="xs:boolean"/>
+                <xs:element name="foodServiceType" type="xs:string"/>
+                <xs:element name="location" type="xs:string"/>
+                <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xs:element ref="img:Image"/>
+                </xs:sequence>
+                <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xs:element ref="ps:PriceSchedule"/>
+                </xs:sequence>
+                <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                    <xs:element ref="rs:Reservation"/>
+                </xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
