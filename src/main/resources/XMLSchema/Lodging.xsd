@@ -2,11 +2,12 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://xml.ws/lodging" xmlns:img="http://xml.ws/image"
     xmlns:l="http://xml.ws/lodging" xmlns:ps="http://xml.ws/priceSchedule"
-    xmlns:rs="http://xml.ws/reservation">
+    xmlns:rs="http://xml.ws/reservation" xmlns:au="http://xml.ws/applicationUser">
 
     <xs:import namespace="http://xml.ws/image" schemaLocation="Image.xsd"/>
     <xs:import namespace="http://xml.ws/priceSchedule" schemaLocation="PriceSchedule.xsd"/>
     <xs:import namespace="http://xml.ws/reservation" schemaLocation="Reservation.xsd"/>
+    <xs:import namespace="http://xml.ws/applicationUser" schemaLocation="ApplicationUser.xsd"/>
     <xs:element name="Lodging">
         <xs:complexType>
             <xs:sequence>
@@ -54,6 +55,7 @@
                 <xs:sequence maxOccurs="unbounded" minOccurs="0">
                     <xs:element ref="rs:Reservation"/>
                 </xs:sequence>
+                <xs:element ref="au:ApplicationUser"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
