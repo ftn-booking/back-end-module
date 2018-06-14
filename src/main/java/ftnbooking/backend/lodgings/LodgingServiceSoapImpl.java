@@ -18,7 +18,7 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	@Override
 	public Long addLodging(Lodging lodging) {
 		lodgingRepository.save(lodging);
-		return (long) 5.0;
+		return lodging.getId();
 	}
 
 }
