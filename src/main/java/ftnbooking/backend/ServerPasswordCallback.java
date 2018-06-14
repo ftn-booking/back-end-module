@@ -17,7 +17,7 @@ public class ServerPasswordCallback implements CallbackHandler {
 
 			if (pc.getUsage() == WSPasswordCallback.SIGNATURE || pc.getUsage() == WSPasswordCallback.DECRYPT) {
 				if (pc.getIdentifier().equals("server")) {
-					pc.setPassword("keyServerPass");
+					pc.setPassword("ReallyBadPassWord");
 				}
 			}
 		}
