@@ -52,6 +52,7 @@ public class TestData {
 		userService.add(user7);
 
 		Lodging lodging1 = new Lodging("Lodging",
+				"Hawaii",
 				"Test lodging 1",
 				4,
 				LodgingType.APARTMENT,
@@ -65,6 +66,7 @@ public class TestData {
 		lodgingService.add(lodging1);
 
 		Lodging lodging2 = new Lodging("Tourist Inn",
+				"Sri Lanka",
 				"Calm place for family",
 				3,
 				LodgingType.B_AND_B,

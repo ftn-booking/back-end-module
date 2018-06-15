@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    
+
 })
 @XmlRootElement(name = "Lodging")
 @Entity
@@ -38,6 +38,11 @@ public class Lodging {
 	@Pattern(regexp = "(?U)[\\p{Alpha}\\h]*")
 	@NotBlank
 	private String name;
+
+	@XmlElement(required = true)
+	@Pattern(regexp = "(?U)[\\p{Alpha}\\h]*")
+	@NotBlank
+	private String address;
 
 	@XmlElement(required = true)
 	@NotBlank
@@ -63,16 +68,16 @@ public class Lodging {
 
 	@XmlElement(required = true)
 	private boolean hasParking;
-	
+
 	@XmlElement(required = true)
 	private boolean hasWifi;
-	
+
 	@XmlElement(required = true)
 	private boolean hasTv;
-	
+
 	@XmlElement(required = true)
 	private boolean hasKitchen;
-	
+
 	@XmlElement(required = true)
 	private boolean hasBathroom;
 
@@ -83,6 +88,7 @@ public class Lodging {
 	public Lodging() {}
 
 	public Lodging(String name,
+			String address,
 			String description,
 			int category,
 			LodgingType type,
@@ -94,6 +100,7 @@ public class Lodging {
 			boolean hasBathroom,
 			FoodServiceType foodServiceType) {
 		this.name = name;
+		this.address = address;
 		this.description = description;
 		this.category = category;
 		this.type = type;
@@ -128,6 +135,14 @@ public class Lodging {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getDescription() {
