@@ -1,5 +1,9 @@
 package ftnbooking.backend.lodgings;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -84,6 +88,9 @@ public class Lodging {
 	@XmlElement(required = true)
 	@Enumerated(EnumType.STRING)
 	private FoodServiceType foodServiceType;
+
+	@ElementCollection
+	private List<String> imagePaths = new ArrayList<String>();
 
 	public Lodging() {}
 
@@ -233,6 +240,16 @@ public class Lodging {
 		this.foodServiceType = foodServiceType;
 	}
 
+	public List<String> getImagePaths() {
+		return imagePaths;
+	}
 
+	public void setImagePaths(List<String> imagePaths) {
+		this.imagePaths = imagePaths;
+	}
+
+	public void addImagePath(String imagePath) {
+		this.imagePaths.add(imagePath);
+	}
 
 }

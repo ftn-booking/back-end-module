@@ -63,6 +63,9 @@ public class TestData {
 				false,
 				true,
 				FoodServiceType.FULL_BOARD);
+		lodging1.addImagePath("img/placeholder.png");
+		lodging1.addImagePath("img/placeholder.png");
+		lodging1.addImagePath("img/placeholder.png");
 		lodgingService.add(lodging1);
 
 		Lodging lodging2 = new Lodging("Tourist Inn",
@@ -77,6 +80,8 @@ public class TestData {
 				true,
 				true,
 				FoodServiceType.BREAKFAST);
+		lodging2.addImagePath("img/placeholder.png");
+		lodging2.addImagePath("img/placeholder.png");
 		lodgingService.add(lodging2);
 	}
 }
