@@ -9,6 +9,8 @@ import ftnbooking.backend.lodgings.FoodServiceType;
 import ftnbooking.backend.lodgings.Lodging;
 import ftnbooking.backend.lodgings.LodgingService;
 import ftnbooking.backend.lodgings.LodgingType;
+import ftnbooking.backend.reservations.Reservation;
+import ftnbooking.backend.reservations.ReservationService;
 import ftnbooking.backend.users.ApplicationUser;
 import ftnbooking.backend.users.ApplicationUserService;
 import ftnbooking.backend.users.ApplicationUserType;
@@ -20,6 +22,8 @@ public class TestData {
 	private ApplicationUserService userService;
 	@Autowired
 	private LodgingService lodgingService;
+	@Autowired
+	private ReservationService reservationService;
 
 	@PostConstruct
 	private void init() {
@@ -85,5 +89,12 @@ public class TestData {
 		lodging2.addImagePath("img/placeholder.png");
 		lodging2.addImagePath("img/placeholder.png");
 		lodgingService.add(lodging2);
+
+		Reservation reservation1 = new Reservation(user1, lodging2, 1534291200000l, 1535155200000l);
+		reservationService.add(reservation1);
+
+		Reservation reservation2 = new Reservation(user1, lodging1, 1539907200000l, 1540252800000l);
+		reservationService.add(reservation2);
+
 	}
 }
