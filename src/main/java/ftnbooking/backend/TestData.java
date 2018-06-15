@@ -62,7 +62,8 @@ public class TestData {
 				false,
 				false,
 				true,
-				FoodServiceType.FULL_BOARD);
+				FoodServiceType.FULL_BOARD,
+				user3);
 		lodging1.addImagePath("img/placeholder.png");
 		lodging1.addImagePath("img/placeholder.png");
 		lodging1.addImagePath("img/placeholder.png");
@@ -79,7 +80,8 @@ public class TestData {
 				false,
 				true,
 				true,
-				FoodServiceType.BREAKFAST);
+				FoodServiceType.BREAKFAST,
+				user4);
 		lodging2.addImagePath("img/placeholder.png");
 		lodging2.addImagePath("img/placeholder.png");
 		lodgingService.add(lodging2);

@@ -9,10 +9,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -22,6 +24,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import ftnbooking.backend.users.ApplicationUser;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
 
@@ -89,8 +93,14 @@ public class Lodging {
 	@Enumerated(EnumType.STRING)
 	private FoodServiceType foodServiceType;
 
+	@XmlElement(required = true)
 	@ElementCollection
 	private List<String> imagePaths = new ArrayList<String>();
+
+	@XmlElement(required = true)
+	@ManyToOne
+	@NotNull
+	private ApplicationUser agent;
 
 	public Lodging() {}
 
@@ -105,7 +115,8 @@ public class Lodging {
 			boolean hasTv,
 			boolean hasKitchen,
 			boolean hasBathroom,
-			FoodServiceType foodServiceType) {
+			FoodServiceType foodServiceType,
+			ApplicationUser agent) {
 		this.name = name;
 		this.address = address;
 		this.description = description;
@@ -118,6 +129,7 @@ public class Lodging {
 		this.hasKitchen = hasKitchen;
 		this.hasBathroom = hasBathroom;
 		this.foodServiceType = foodServiceType;
+		this.agent = agent;
 	}
 
 	public Long getId() {
@@ -250,6 +262,14 @@ public class Lodging {
 
 	public void addImagePath(String imagePath) {
 		this.imagePaths.add(imagePath);
+	}
+
+	public ApplicationUser getAgent() {
+		return agent;
+	}
+
+	public void setAgent(ApplicationUser agent) {
+		this.agent = agent;
 	}
 
 }
