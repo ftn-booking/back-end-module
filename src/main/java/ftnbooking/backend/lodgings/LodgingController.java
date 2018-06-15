@@ -33,4 +33,12 @@ public class LodgingController {
 		return new ResponseEntity<>(lodging, HttpStatus.OK);
 	}
 
+	@GetMapping("/from/{fromDate:\\d+}/to/{toDate:\\d+}")
+	public ResponseEntity<List<Lodging>> getAvailable(@PathVariable long fromDate, @PathVariable long toDate) {
+		List<Lodging> lodgings = lodgingService.findAvailable(fromDate, toDate);
+		if(lodgings == null || lodgings.isEmpty())
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(lodgings, HttpStatus.OK);
+	}
+
 }

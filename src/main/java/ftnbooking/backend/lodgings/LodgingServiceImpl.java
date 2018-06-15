@@ -1,10 +1,14 @@
 package ftnbooking.backend.lodgings;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import ftnbooking.backend.reservations.Reservation;
+import ftnbooking.backend.reservations.ReservationRepository;
 
 @Transactional(readOnly = true)
 @Service
@@ -12,6 +16,9 @@ public class LodgingServiceImpl implements LodgingService {
 
 	@Autowired
 	private LodgingRepository lodgingRepository;
+	@Autowired
+	private ReservationRepository reservationRepository;
+
 
 	@Override
 	public Lodging findOne(Long id) {
@@ -21,6 +28,29 @@ public class LodgingServiceImpl implements LodgingService {
 	@Override
 	public List<Lodging> findAll() {
 		return lodgingRepository.findAll();
+	}
+
+	@Override
+	public boolean isAvailable(Lodging lodging, long fromDate, long toDate) {
+		List<Reservation> reservations = reservationRepository
+				.findByLodgingAndToDateGreaterThanAndFromDateLessThan(lodging, fromDate, toDate);
+		if(reservations == null || reservations.isEmpty())
+			// There are no other reservations for this lodging at specified time
+			return true;
+		return false;
+	}
+
+	@Override
+	public List<Lodging> findAvailable(long fromDate, long toDate) {
+		List<Lodging> ret = new ArrayList<>();
+
+		List<Lodging> lodgings = lodgingRepository.findAll();
+		for(Lodging lodging : lodgings) {
+			if(isAvailable(lodging, fromDate, toDate)) {
+				ret.add(lodging);
+			}
+		}
+		return ret;
 	}
 
 	@Override

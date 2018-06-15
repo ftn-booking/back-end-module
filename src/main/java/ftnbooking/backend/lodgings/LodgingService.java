@@ -8,6 +8,10 @@ public interface LodgingService {
 
 	List<Lodging> findAll();
 
+	boolean isAvailable(Lodging lodging, long fromDate, long toDate);
+
+	List<Lodging> findAvailable(long fromDate, long toDate);
+
 	Lodging add(Lodging input);
 
 }
