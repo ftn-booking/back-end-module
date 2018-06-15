@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @WebService(endpointInterface = "ftnbooking.backend.lodgings.LodgingServiceSoap",
 			serviceName = "LodgingService",
 			portName = "LodgingServicePort",
-			targetNamespace = "http://backend.ftnbooking/lodgingServiceSoap")
+			targetNamespace = "https://backend.ftnbooking/lodgingServiceSoap")
 public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 
 	@Autowired
