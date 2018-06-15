@@ -14,6 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -53,7 +54,7 @@ public class ApplicationUser {
 	@JsonProperty(access = Access.READ_ONLY)
 	private ApplicationUserType userType = ApplicationUserType.VISITOR;
 
-	@JsonProperty(access = Access.READ_ONLY)
+	@JsonIgnore
 	private String resetToken = UUID.randomUUID().toString();
 
 	public ApplicationUser() {}
