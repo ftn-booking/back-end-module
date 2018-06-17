@@ -3,13 +3,17 @@ package ftnbooking.backend.lodgings;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -25,6 +29,8 @@ import javax.xml.bind.annotation.XmlType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import ftnbooking.backend.types.FeatureType;
+import ftnbooking.backend.types.LodgingType;
 import ftnbooking.backend.users.ApplicationUser;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -61,9 +67,9 @@ public class Lodging {
 	@Min(0)
 	private int category;
 
-	@XmlElement(required = true)
+	/*@XmlElement(required = true)
 	@Enumerated(EnumType.STRING)
-	private LodgingType type;
+	private LodgingType type;*/
 
 	@XmlElement(required = true)
 	@Max(5)
@@ -74,6 +80,7 @@ public class Lodging {
 	@Min(1)
 	private int numberOfBeds;
 
+	/*
 	@XmlElement(required = true)
 	private boolean hasParking;
 
@@ -93,6 +100,15 @@ public class Lodging {
 	@Enumerated(EnumType.STRING)
 	private FoodServiceType foodServiceType;
 
+*/
+	@XmlElement(required = true)
+	@ManyToMany(cascade = CascadeType.REMOVE)
+	private List<FeatureType> featureType;
+	
+	@XmlElement(required = true)
+	@ManyToOne(fetch = FetchType.EAGER)
+	private LodgingType lodgingType;
+	
 	@XmlElement(required = true)
 	@ElementCollection
 	private List<String> imagePaths = new ArrayList<String>();
@@ -108,27 +124,17 @@ public class Lodging {
 			String address,
 			String description,
 			int category,
-			LodgingType type,
+			LodgingType lodgingType,
 			int numberOfBeds,
-			boolean hasParking,
-			boolean hasWifi,
-			boolean hasTv,
-			boolean hasKitchen,
-			boolean hasBathroom,
-			FoodServiceType foodServiceType,
+			List<FeatureType> featureType,
 			ApplicationUser agent) {
 		this.name = name;
 		this.address = address;
 		this.description = description;
 		this.category = category;
-		this.type = type;
+		this.lodgingType = lodgingType;
 		this.numberOfBeds = numberOfBeds;
-		this.hasParking = hasParking;
-		this.hasWifi = hasWifi;
-		this.hasTv = hasTv;
-		this.hasKitchen = hasKitchen;
-		this.hasBathroom = hasBathroom;
-		this.foodServiceType = foodServiceType;
+		this.featureType = featureType;
 		this.agent = agent;
 	}
 
@@ -180,12 +186,12 @@ public class Lodging {
 		this.category = category;
 	}
 
-	public LodgingType getType() {
-		return type;
+	public LodgingType getLodgingType() {
+		return lodgingType;
 	}
 
-	public void setType(LodgingType type) {
-		this.type = type;
+	public void setLodgingType(LodgingType lodgingType) {
+		this.lodgingType = lodgingType;
 	}
 
 	public Integer getRating() {
@@ -204,52 +210,12 @@ public class Lodging {
 		this.numberOfBeds = numberOfBeds;
 	}
 
-	public boolean isHasParking() {
-		return hasParking;
+	public List<FeatureType> getFeatureType() {
+		return featureType;
 	}
 
-	public void setHasParking(boolean hasParking) {
-		this.hasParking = hasParking;
-	}
-
-	public boolean isHasWifi() {
-		return hasWifi;
-	}
-
-	public void setHasWifi(boolean hasWifi) {
-		this.hasWifi = hasWifi;
-	}
-
-	public boolean isHasTv() {
-		return hasTv;
-	}
-
-	public void setHasTv(boolean hasTv) {
-		this.hasTv = hasTv;
-	}
-
-	public boolean isHasKitchen() {
-		return hasKitchen;
-	}
-
-	public void setHasKitchen(boolean hasKitchen) {
-		this.hasKitchen = hasKitchen;
-	}
-
-	public boolean isHasBathroom() {
-		return hasBathroom;
-	}
-
-	public void setHasBathroom(boolean hasBathroom) {
-		this.hasBathroom = hasBathroom;
-	}
-
-	public FoodServiceType getFoodServiceType() {
-		return foodServiceType;
-	}
-
-	public void setFoodServiceType(FoodServiceType foodServiceType) {
-		this.foodServiceType = foodServiceType;
+	public void setFeatureType(List<FeatureType> featureType) {
+		this.featureType = featureType;
 	}
 
 	public List<String> getImagePaths() {

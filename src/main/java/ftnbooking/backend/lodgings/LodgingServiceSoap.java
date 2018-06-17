@@ -21,4 +21,5 @@ public interface LodgingServiceSoap {
 	Long realizeReservation(Reservation reservation);
 	List<Lodging> synchronizeLodging(ApplicationUser agent);
 	List<Reservation> synchronizeReservation(ApplicationUser agent);
+	//ostale su jos poruke
 }
