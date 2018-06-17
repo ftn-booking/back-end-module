@@ -6,6 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -13,9 +18,15 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import ftnbooking.backend.lodgings.Lodging;
 import ftnbooking.backend.users.ApplicationUser;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+
+})
+@XmlRootElement(name = "Reservation")
 @Entity
 public class Reservation {
 
+	
 	@Id
 	@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)
@@ -24,16 +35,20 @@ public class Reservation {
 	@Version
 	private Long version;
 
+	@XmlElement(required = true)
 	@ManyToOne
 	@NotNull
 	private ApplicationUser user;
 
+	@XmlElement(required = true)
 	@ManyToOne
 	@NotNull
 	private Lodging lodging;
 
+	@XmlElement(required = true)
 	private long fromDate;
 
+	@XmlElement(required = true)
 	private long toDate;
 
 	public Reservation() {}
