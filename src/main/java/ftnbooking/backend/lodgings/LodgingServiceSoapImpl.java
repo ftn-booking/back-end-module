@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 import ftnbooking.backend.reservations.Reservation;
 import ftnbooking.backend.reservations.ReservationRepository;
+import ftnbooking.backend.types.FeatureType;
+import ftnbooking.backend.types.FeatureTypeRepository;
+import ftnbooking.backend.types.LodgingType;
+import ftnbooking.backend.types.LodgingTypeRepository;
 import ftnbooking.backend.users.ApplicationUser;
 
 @Service
@@ -24,6 +28,12 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	
 	@Autowired
 	private ReservationRepository reservationRepository;
+	
+	@Autowired
+	private LodgingTypeRepository lodgingTypeRepository;
+	
+	@Autowired
+	private FeatureTypeRepository featureTypeRepository;
 	
 	@Override
 	public Long addLodging(Lodging lodging) {
@@ -67,6 +77,18 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 			reservations.addAll(reservationsByLodging);
 		}
 		return reservations;
+	}
+
+	@Override
+	public List<FeatureType> synchronizeFeatureType() {
+		// TODO Auto-generated method stub
+		return featureTypeRepository.findAll();
+	}
+
+	@Override
+	public List<LodgingType> synchronizeLodgingType() {
+		// TODO Auto-generated method stub
+		return lodgingTypeRepository.findAll();
 	}
 
 	

@@ -8,6 +8,8 @@ import org.apache.cxf.annotations.SchemaValidation;
 import org.apache.cxf.annotations.SchemaValidation.SchemaValidationType;
 
 import ftnbooking.backend.reservations.Reservation;
+import ftnbooking.backend.types.FeatureType;
+import ftnbooking.backend.types.LodgingType;
 import ftnbooking.backend.users.ApplicationUser;
 
 
@@ -21,5 +23,7 @@ public interface LodgingServiceSoap {
 	Long realizeReservation(Reservation reservation);
 	List<Lodging> synchronizeLodging(ApplicationUser agent);
 	List<Reservation> synchronizeReservation(ApplicationUser agent);
+	List<FeatureType> synchronizeFeatureType();
+	List<LodgingType> synchronizeLodgingType();
 	//ostale su jos poruke
 }
