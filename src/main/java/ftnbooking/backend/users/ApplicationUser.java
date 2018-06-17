@@ -13,11 +13,21 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+
+})
+@XmlRootElement(name = "ApplicationUser")
 @Entity
 public class ApplicationUser {
 
@@ -29,27 +39,34 @@ public class ApplicationUser {
 	@Version
 	private Long version;
 
+	@XmlElement(required = true)
 	@Email
 	@NotBlank
 	private String email;
 
+	@XmlElement(required = true)
 	@Size(min = 6)
 	@NotEmpty
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 
+	@XmlElement(required = true)
 	@Pattern(regexp = "(?U)\\p{Alpha}*")
 	private String name;
 
+	@XmlElement(required = true)
 	@Pattern(regexp = "(?U)\\p{Alpha}*")
 	private String lastName;
 
+	@XmlElement(required = true)
 	@Pattern(regexp = "(?U)[\\p{Alpha}\\h]*")
 	private String city;
 
+	@XmlElement(required = true)
 	@Pattern(regexp = "(\\d{9,10})|(^$)")
 	private String phoneNumber;
 
+	@XmlElement(required = true)
 	@Enumerated(EnumType.STRING)
 	@JsonProperty(access = Access.READ_ONLY)
 	private ApplicationUserType userType = ApplicationUserType.VISITOR;
