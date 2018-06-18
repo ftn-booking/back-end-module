@@ -39,7 +39,8 @@ import ftnbooking.backend.users.ApplicationUser;
 @XmlRootElement(name = "Lodging")
 @Entity
 public class Lodging {
-
+	
+	@XmlElement(required = true)
 	@Id
 	@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)

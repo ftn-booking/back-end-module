@@ -26,7 +26,7 @@ import ftnbooking.backend.users.ApplicationUser;
 @Entity
 public class Reservation {
 
-	
+	@XmlElement(required = true)
 	@Id
 	@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)
