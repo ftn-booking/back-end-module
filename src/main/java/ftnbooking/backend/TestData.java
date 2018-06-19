@@ -7,6 +7,9 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import ftnbooking.backend.comments.Approval;
+import ftnbooking.backend.comments.Comment;
+import ftnbooking.backend.comments.CommentService;
 import ftnbooking.backend.lodgings.Lodging;
 import ftnbooking.backend.lodgings.LodgingService;
 import ftnbooking.backend.prices.Price;
@@ -40,6 +43,8 @@ public class TestData {
 	private FoodServiceTypeService foodServiceTypeService;
 	@Autowired
 	private PriceService priceService;
+	@Autowired
+	private CommentService commentService;
 
 	@PostConstruct
 	private void init() {
@@ -150,6 +155,16 @@ public class TestData {
 
 		Reservation reservation2 = new Reservation(user1, lodging1, 1539907200000l, 1540252800000l);
 		reservationService.add(reservation2);
+
+		Comment comment1 = new Comment(user1, reservation1, "Nice place");
+		comment1.setApproved(Approval.APPROVED);
+		commentService.add(comment1);
+		Comment comment2 = new Comment(user1, reservation1, "Good staff");
+		comment2.setApproved(Approval.APPROVED);
+		commentService.add(comment2);
+		Comment comment3 = new Comment(user1, reservation1, "Nice view!");
+		comment3.setApproved(Approval.APPROVED);
+		commentService.add(comment3);
 
 	}
 }
