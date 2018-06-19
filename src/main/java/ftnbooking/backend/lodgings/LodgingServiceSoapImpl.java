@@ -8,6 +8,8 @@ import javax.jws.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ftnbooking.backend.prices.Price;
+import ftnbooking.backend.prices.PriceService;
 import ftnbooking.backend.reservations.Reservation;
 import ftnbooking.backend.reservations.ReservationRepository;
 import ftnbooking.backend.types.FeatureType;
@@ -39,6 +41,9 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	
 	@Autowired
 	private FoodServiceTypeRepository foodServiceTypeRepository;
+	
+	@Autowired
+	private PriceService priceService;
 	
 	@Override
 	public Long addLodging(Lodging lodging) {
@@ -97,6 +102,16 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	@Override
 	public List<FoodServiceType> synchronizeFoodServiceType() {
 		return foodServiceTypeRepository.findAll();
+	}
+
+	@Override
+	public List<Price> synchronizePrice(ApplicationUser agent) {
+		return priceService.findByAgent(agent);
+	}
+
+	@Override
+	public Long addPrice(Price price) {
+		return priceService.add(price).getId();
 	}
 
 	

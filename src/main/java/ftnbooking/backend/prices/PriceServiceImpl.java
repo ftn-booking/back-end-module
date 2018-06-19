@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ftnbooking.backend.lodgings.Lodging;
 import ftnbooking.backend.lodgings.LodgingRepository;
 import ftnbooking.backend.users.ApplicationUser;
 
+@Service
 public class PriceServiceImpl implements PriceService{
 
 	@Autowired
