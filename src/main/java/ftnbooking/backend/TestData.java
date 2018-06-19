@@ -1,6 +1,5 @@
 package ftnbooking.backend;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -37,7 +36,7 @@ public class TestData {
 	private FeatureTypeService featureTypeService;
 	@Autowired
 	private FoodServiceTypeService foodServiceTypeService;
-	
+
 	@PostConstruct
 	private void init() {
 		ApplicationUser user1 = new ApplicationUser("ch@me", "qweqwe", "Chewbacca", "Chewbacca", "Kashyyyk", null);
@@ -67,29 +66,35 @@ public class TestData {
 		ApplicationUser user7 = new ApplicationUser("sys@me", "qweqwe", "Sheev", "Palpatine", "Naboo", null);
 		user7.setUserType(ApplicationUserType.ADMIN);
 		userService.add(user7);
-		
+
 		LodgingType lodgingType1 = new LodgingType("HOTEL");
 		LodgingType lodgingType2 = new LodgingType("B & B");
 		LodgingType lodgingType3 = new LodgingType("APARTMENT");
 		lodgingTypeService.add(lodgingType1);
 		lodgingTypeService.add(lodgingType2);
 		lodgingTypeService.add(lodgingType3);
-		
-		FeatureType featureType1 = new FeatureType("hasTV");
-		FeatureType featureType2 = new FeatureType("hasWiFi");
-		FeatureType featureType3 = new FeatureType("hasParking");
+
+		FeatureType featureType1 = new FeatureType("TV");
+		FeatureType featureType2 = new FeatureType("WiFi");
+		FeatureType featureType3 = new FeatureType("Parking");
 		featureTypeService.add(featureType1);
 		featureTypeService.add(featureType2);
 		featureTypeService.add(featureType3);
-		List<FeatureType> features = featureTypeService.findAll();
-		
-		FoodServiceType foodServiceType1 = new FoodServiceType("BREAKFAST");
-		FoodServiceType foodServiceType2 = new FoodServiceType("FULLBOARD");
-		FoodServiceType foodServiceType3 = new FoodServiceType("HALFBOARD");
+		List<FeatureType> features1 = featureTypeService.findAll();
+		FeatureType featureType4 = new FeatureType("Kitchen");
+		FeatureType featureType5 = new FeatureType("Bathroom");
+		featureTypeService.add(featureType4);
+		featureTypeService.add(featureType5);
+		List<FeatureType> features2 = featureTypeService.findAll();
+
+
+		FoodServiceType foodServiceType1 = new FoodServiceType("Breakfast");
+		FoodServiceType foodServiceType2 = new FoodServiceType("Full board");
+		FoodServiceType foodServiceType3 = new FoodServiceType("Half board");
 		foodServiceTypeService.add(foodServiceType1);
 		foodServiceTypeService.add(foodServiceType2);
 		foodServiceTypeService.add(foodServiceType3);
-		
+
 		Lodging lodging1 = new Lodging("Lodging",
 				"Hawaii",
 				"Test lodging 1",
@@ -97,7 +102,7 @@ public class TestData {
 				lodgingType1,
 				foodServiceType1,
 				2,
-				features,
+				features1,
 				user3);
 		lodging1.addImagePath("img/placeholder.png");
 		lodging1.addImagePath("img/placeholder.png");
@@ -111,7 +116,7 @@ public class TestData {
 				lodgingType2,
 				foodServiceType2,
 				3,
-				features,
+				features2,
 				user4);
 		lodging2.addImagePath("img/placeholder.png");
 		lodging2.addImagePath("img/placeholder.png");
