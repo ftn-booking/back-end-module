@@ -1,28 +1,22 @@
 package ftnbooking.backend.types;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-/**
- * hasTv, hasParking...
- * */
+/**breakfast, fullboard*/
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
 })
 @XmlRootElement(name = "FeatureType")
 @Entity
-public class FeatureType {
+public class FoodServiceType {
 	@XmlElement(required = true)
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -34,11 +28,11 @@ public class FeatureType {
 	@XmlElement(required = true)
 	private boolean active;
 	
-	public FeatureType() {
+	public FoodServiceType() {
 		
 	}
 
-	public FeatureType(String name) {
+	public FoodServiceType(String name) {
 		super();
 		this.name = name;
 		this.active = true;

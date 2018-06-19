@@ -30,6 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import ftnbooking.backend.types.FeatureType;
+import ftnbooking.backend.types.FoodServiceType;
 import ftnbooking.backend.types.LodgingType;
 import ftnbooking.backend.users.ApplicationUser;
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -108,6 +109,10 @@ public class Lodging {
 	
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER)
+	private FoodServiceType foodServiceType;
+	
+	@XmlElement(required = true)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private LodgingType lodgingType;
 	
 	@XmlElement(required = true)
@@ -126,6 +131,7 @@ public class Lodging {
 			String description,
 			int category,
 			LodgingType lodgingType,
+			FoodServiceType foodServiceType,
 			int numberOfBeds,
 			List<FeatureType> featureType,
 			ApplicationUser agent) {
@@ -134,6 +140,7 @@ public class Lodging {
 		this.description = description;
 		this.category = category;
 		this.lodgingType = lodgingType;
+		this.foodServiceType = foodServiceType;
 		this.numberOfBeds = numberOfBeds;
 		this.featureType = featureType;
 		this.agent = agent;
@@ -239,4 +246,13 @@ public class Lodging {
 		this.agent = agent;
 	}
 
+	public FoodServiceType getFoodServiceType() {
+		return foodServiceType;
+	}
+
+	public void setFoodServiceType(FoodServiceType foodServiceType) {
+		this.foodServiceType = foodServiceType;
+	}
+
+	
 }

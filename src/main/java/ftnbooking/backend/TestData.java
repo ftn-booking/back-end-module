@@ -14,6 +14,8 @@ import ftnbooking.backend.reservations.Reservation;
 import ftnbooking.backend.reservations.ReservationService;
 import ftnbooking.backend.types.FeatureType;
 import ftnbooking.backend.types.FeatureTypeService;
+import ftnbooking.backend.types.FoodServiceType;
+import ftnbooking.backend.types.FoodServiceTypeService;
 import ftnbooking.backend.types.LodgingType;
 import ftnbooking.backend.types.LodgingTypeService;
 import ftnbooking.backend.users.ApplicationUser;
@@ -33,6 +35,8 @@ public class TestData {
 	private LodgingTypeService lodgingTypeService;
 	@Autowired
 	private FeatureTypeService featureTypeService;
+	@Autowired
+	private FoodServiceTypeService foodServiceTypeService;
 	
 	@PostConstruct
 	private void init() {
@@ -79,12 +83,19 @@ public class TestData {
 		featureTypeService.add(featureType3);
 		List<FeatureType> features = featureTypeService.findAll();
 		
+		FoodServiceType foodServiceType1 = new FoodServiceType("BREAKFAST");
+		FoodServiceType foodServiceType2 = new FoodServiceType("FULLBOARD");
+		FoodServiceType foodServiceType3 = new FoodServiceType("HALFBOARD");
+		foodServiceTypeService.add(foodServiceType1);
+		foodServiceTypeService.add(foodServiceType2);
+		foodServiceTypeService.add(foodServiceType3);
 		
 		Lodging lodging1 = new Lodging("Lodging",
 				"Hawaii",
 				"Test lodging 1",
 				4,
 				lodgingType1,
+				foodServiceType1,
 				2,
 				features,
 				user3);
@@ -98,6 +109,7 @@ public class TestData {
 				"Calm place for family",
 				3,
 				lodgingType2,
+				foodServiceType2,
 				3,
 				features,
 				user4);
