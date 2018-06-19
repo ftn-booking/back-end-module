@@ -13,6 +13,8 @@ public interface CommentService {
 	
 	public List<Comment> findByLodging(Lodging lodging);
 	
+	public Comment findById(Long id);
+	
 	public List<Comment> findByUserAndApproved(ApplicationUser user, Approval approved);
 	
 	public List<Comment> findByLodgingAndApproved(Lodging lodging, Approval approved);

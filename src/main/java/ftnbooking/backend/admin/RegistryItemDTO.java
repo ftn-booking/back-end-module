@@ -1,6 +1,7 @@
 package ftnbooking.backend.admin;
 
 import ftnbooking.backend.types.FeatureType;
+import ftnbooking.backend.types.FoodServiceType;
 import ftnbooking.backend.types.LodgingType;
 
 public class RegistryItemDTO {
@@ -49,6 +50,12 @@ public class RegistryItemDTO {
 		id = featureType.getId();
 		name = featureType.getName();
 		active = featureType.isActive();
+	}
+	public RegistryItemDTO(FoodServiceType foodServiceType) {
+		// TODO Auto-generated constructor stub
+		id = foodServiceType.getId();
+		name = foodServiceType.getName();
+		active = foodServiceType.isActive();
 	}
 	
 	

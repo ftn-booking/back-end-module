@@ -45,4 +45,10 @@ public class CommentServiceImpl implements CommentService {
 		return commentRepository.save(input);
 	}
 
+	@Override
+	public Comment findById(Long id) {
+		// TODO Auto-generated method stub
+		return commentRepository.findById(id).orElse(null);
+	}
+
 }

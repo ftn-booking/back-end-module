@@ -165,6 +165,9 @@ public class TestData {
 		Comment comment3 = new Comment(user1, reservation1, "Nice view!");
 		comment3.setApproved(Approval.APPROVED);
 		commentService.add(comment3);
+		Comment comment4 = new Comment(user1, reservation1, "Nice view!");
+		comment4.setApproved(Approval.PENDING);
+		commentService.add(comment4);
 
 	}
 }
