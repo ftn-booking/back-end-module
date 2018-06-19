@@ -15,10 +15,10 @@ public class PriceServiceImpl implements PriceService{
 
 	@Autowired
 	private PriceRepository priceRepository;
-	
+
 	@Autowired
 	private LodgingRepository lodgingRepository;
-	
+
 	@Override
 	public List<Price> findAll() {
 		return priceRepository.findAll();
@@ -27,6 +27,12 @@ public class PriceServiceImpl implements PriceService{
 	@Override
 	public List<Price> findByLodging(Lodging lodging) {
 		return priceRepository.findByLodging(lodging);
+	}
+
+	@Override
+	public List<Price> findActive(Lodging lodging, long fromDate) {
+		return priceRepository
+				.findByLodgingAndToDateGreaterThanAndFromDateLessThan(lodging,fromDate, fromDate);
 	}
 
 	@Override
