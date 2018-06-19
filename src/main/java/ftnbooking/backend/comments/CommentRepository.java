@@ -11,9 +11,9 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 	
 	List<Comment> findByUser(ApplicationUser user);
 	
-	List<Comment> findByLodging(Lodging lodging);
+	List<Comment> findByReservation_Lodging(Lodging lodging);
 	
 	List<Comment> findByUserAndApproved(ApplicationUser user, Approval approved);
 	
-	List<Comment> findByLodgingAndApproved(Lodging lodging, Approval approved);
+	List<Comment> findByReservation_LodgingAndApproved(Lodging lodging, Approval approved);
 }

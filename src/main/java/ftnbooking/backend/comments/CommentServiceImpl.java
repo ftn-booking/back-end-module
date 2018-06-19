@@ -26,7 +26,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public List<Comment> findByLodging(Lodging lodging) {
-		return commentRepository.findByLodging(lodging);
+		return commentRepository.findByReservation_Lodging(lodging);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public List<Comment> findByLodgingAndApproved(Lodging lodging, Approval approved) {
-		return commentRepository.findByLodgingAndApproved(lodging, approved);
+		return commentRepository.findByReservation_LodgingAndApproved(lodging, approved);
 	}
 
 	@Override

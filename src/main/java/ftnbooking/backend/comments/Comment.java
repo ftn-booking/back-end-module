@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import ftnbooking.backend.lodgings.Lodging;
+import ftnbooking.backend.reservations.Reservation;
 import ftnbooking.backend.users.ApplicationUser;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -39,7 +40,7 @@ public class Comment {
 	@XmlElement(required = true)
 	@ManyToOne
 	@NotNull
-	private Lodging lodging;
+	private Reservation reservation;
 	
 	@XmlElement(required = true)
 	@NotNull
@@ -53,11 +54,11 @@ public class Comment {
 	}
 
 	public Comment(@NotNull ApplicationUser user, 
-			@NotNull Lodging lodging, 
+			@NotNull Reservation reservation, 
 			@NotNull String content) {
 		super();
 		this.user = user;
-		this.lodging = lodging;
+		this.reservation = reservation;
 		this.content = content;
 		this.approved = Approval.PENDING;
 	}
@@ -78,12 +79,12 @@ public class Comment {
 		this.user = user;
 	}
 
-	public Lodging getLodging() {
-		return lodging;
+	public Reservation getReservation() {
+		return reservation;
 	}
 
-	public void setLodging(Lodging lodging) {
-		this.lodging = lodging;
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
 	}
 
 	public String getContent() {
