@@ -16,6 +16,4 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 	List<Comment> findByUserAndApproved(ApplicationUser user, Approval approved);
 	
 	List<Comment> findByLodgingAndApproved(Lodging lodging, Approval approved);
-
-	Comment add(Comment input);
 }

@@ -46,7 +46,7 @@ public class Comment {
 	private String content;
 	
 	@XmlElement(required = true)
-	private boolean approved;
+	private Approval approved;
 	
 	public Comment() {
 		
@@ -59,7 +59,7 @@ public class Comment {
 		this.user = user;
 		this.lodging = lodging;
 		this.content = content;
-		this.approved = false;
+		this.approved = Approval.PENDING;
 	}
 
 	public Long getId() {
@@ -94,11 +94,11 @@ public class Comment {
 		this.content = content;
 	}
 
-	public boolean isApproved() {
+	public Approval getApproved() {
 		return approved;
 	}
 
-	public void setApproved(boolean approved) {
+	public void setApproved(Approval approved) {
 		this.approved = approved;
 	}
 	

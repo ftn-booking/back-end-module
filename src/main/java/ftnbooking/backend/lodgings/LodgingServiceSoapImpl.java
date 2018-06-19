@@ -12,6 +12,8 @@ import ftnbooking.backend.reservations.Reservation;
 import ftnbooking.backend.reservations.ReservationRepository;
 import ftnbooking.backend.types.FeatureType;
 import ftnbooking.backend.types.FeatureTypeRepository;
+import ftnbooking.backend.types.FoodServiceType;
+import ftnbooking.backend.types.FoodServiceTypeRepository;
 import ftnbooking.backend.types.LodgingType;
 import ftnbooking.backend.types.LodgingTypeRepository;
 import ftnbooking.backend.users.ApplicationUser;
@@ -34,6 +36,9 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	
 	@Autowired
 	private FeatureTypeRepository featureTypeRepository;
+	
+	@Autowired
+	private FoodServiceTypeRepository foodServiceTypeRepository;
 	
 	@Override
 	public Long addLodging(Lodging lodging) {
@@ -81,14 +86,17 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 
 	@Override
 	public List<FeatureType> synchronizeFeatureType() {
-		// TODO Auto-generated method stub
 		return featureTypeRepository.findAll();
 	}
 
 	@Override
 	public List<LodgingType> synchronizeLodgingType() {
-		// TODO Auto-generated method stub
 		return lodgingTypeRepository.findAll();
+	}
+
+	@Override
+	public List<FoodServiceType> synchronizeFoodServiceType() {
+		return foodServiceTypeRepository.findAll();
 	}
 
 	
