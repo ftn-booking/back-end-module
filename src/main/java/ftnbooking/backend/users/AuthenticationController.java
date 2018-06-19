@@ -83,4 +83,13 @@ public class AuthenticationController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@GetMapping("/{mail}")
+	public ResponseEntity<?> getUserByMail(@PathVariable String mail){
+		ApplicationUser user = userService.findOne(mail);
+		if (user != null)
+			return new ResponseEntity<>(user,HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
+	
 }
