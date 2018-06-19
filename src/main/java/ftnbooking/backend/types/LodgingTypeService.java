@@ -8,4 +8,5 @@ public interface LodgingTypeService {
 	List<LodgingType> findAll();
 
 	LodgingType add(LodgingType input);
+	
 }

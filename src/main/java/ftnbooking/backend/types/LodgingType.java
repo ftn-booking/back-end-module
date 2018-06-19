@@ -10,6 +10,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 /**HOTEL, B_AND_B, APARTMENT*/
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -19,7 +22,8 @@ import javax.xml.bind.annotation.XmlType;
 public class LodgingType {
 	@XmlElement(required = true)
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue//(strategy=GenerationType.AUTO)
+	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
 	
 	@XmlElement(required = true)

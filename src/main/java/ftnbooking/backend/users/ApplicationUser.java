@@ -70,6 +70,12 @@ public class ApplicationUser {
 	@Enumerated(EnumType.STRING)
 	@JsonProperty(access = Access.READ_ONLY)
 	private ApplicationUserType userType = ApplicationUserType.VISITOR;
+	
+	
+	@XmlElement(required = true)
+	private boolean banned = false;
+	@XmlElement(required = true)
+	private boolean active = true;
 
 	@JsonIgnore
 	private String resetToken = UUID.randomUUID().toString();
@@ -81,13 +87,35 @@ public class ApplicationUser {
 			String name,
 			String lastName,
 			String city,
-			String phoneNumber) {
+			String phoneNumber,
+			boolean banned,
+			boolean active) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
 		this.lastName = lastName;
 		this.city = city;
 		this.phoneNumber = phoneNumber;
+		this.banned=banned;
+		this.active=active;
+	}
+	
+
+	public ApplicationUser(String email,
+			String password,
+			String name,
+			String lastName,
+			String city,
+			String phoneNumber) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.lastName = lastName;
+		this.city = city;
+		this.phoneNumber = phoneNumber;
+		this.active=true;
+		
 	}
 
 	public Long getId() {
@@ -170,5 +198,22 @@ public class ApplicationUser {
 		this.resetToken = resetToken;
 	}
 
+	public boolean isBanned() {
+		return banned;
+	}
+
+	public void setBanned(boolean banned) {
+		this.banned = banned;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	
 }
 
