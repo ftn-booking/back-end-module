@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import ftnbooking.backend.lodgings.Lodging;
 import ftnbooking.backend.lodgings.LodgingService;
+import ftnbooking.backend.prices.Price;
+import ftnbooking.backend.prices.PriceService;
 import ftnbooking.backend.reservations.Reservation;
 import ftnbooking.backend.reservations.ReservationService;
 import ftnbooking.backend.types.FeatureType;
@@ -36,6 +38,8 @@ public class TestData {
 	private FeatureTypeService featureTypeService;
 	@Autowired
 	private FoodServiceTypeService foodServiceTypeService;
+	@Autowired
+	private PriceService priceService;
 
 	@PostConstruct
 	private void init() {
@@ -121,6 +125,25 @@ public class TestData {
 		lodging2.addImagePath("img/placeholder.png");
 		lodging2.addImagePath("img/placeholder.png");
 		lodgingService.add(lodging2);
+
+		// from 2018-01-01 - 2019-01-01
+		Price price1 = new Price(lodging1, 1514764800000l, 1546300800000l, 20);
+		// from 2019-01-01 - 2020-01-01
+		Price price2 = new Price(lodging1, 1546300800001l, 1577836800000l, 30);
+		// from 2020-01-01 - 2021-01-01
+		Price price3 = new Price(lodging1, 1577836800001l, 1609459200000l, 40);
+		// from 2018-01-01 - 2019-01-01
+		Price price4 = new Price(lodging2, 1514764800000l, 1546300800000l, 50);
+		// from 2019-01-01 - 2020-01-01
+		Price price5 = new Price(lodging2, 1546300800001l, 1577836800000l, 60);
+		// from 2020-01-01 - 2021-01-01
+		Price price6 = new Price(lodging2, 1577836800001l, 1609459200000l, 70);
+		priceService.add(price1);
+		priceService.add(price2);
+		priceService.add(price3);
+		priceService.add(price4);
+		priceService.add(price5);
+		priceService.add(price6);
 
 		Reservation reservation1 = new Reservation(user1, lodging2, 1534291200000l, 1535155200000l);
 		reservationService.add(reservation1);
