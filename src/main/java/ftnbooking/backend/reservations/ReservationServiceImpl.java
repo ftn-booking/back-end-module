@@ -43,4 +43,16 @@ public class ReservationServiceImpl implements ReservationService {
 		return reservationRepository.save(input);
 	}
 
+	@Override
+	@Transactional(readOnly = false)
+	public Double addRating(ApplicationUser user, Reservation reservation, int newRating) {
+		if(user.getId() != reservation.getUser().getId()
+				|| reservation.getRating() != null)
+			return null;
+		reservation.setRating(newRating);
+		Double ret = lodgingService.recalculateRating(reservation.getLodging(), newRating);
+		reservationRepository.save(reservation);
+		return ret;
+	}
+
 }

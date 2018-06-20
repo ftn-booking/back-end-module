@@ -116,6 +116,8 @@ public class TestData {
 		lodging1.addImagePath("img/placeholder.png");
 		lodging1.addImagePath("img/placeholder.png");
 		lodging1.addImagePath("img/placeholder.png");
+		lodging1.setRating(4.6);
+		lodging1.setNumberOfRatings(5);
 		lodgingService.add(lodging1);
 
 		Lodging lodging2 = new Lodging("Tourist Inn",

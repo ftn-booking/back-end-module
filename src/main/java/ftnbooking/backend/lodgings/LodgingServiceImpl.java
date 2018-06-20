@@ -59,4 +59,21 @@ public class LodgingServiceImpl implements LodgingService {
 		return lodgingRepository.save(input);
 	}
 
+	@Override
+	@Transactional(readOnly = false)
+	public Double recalculateRating(Lodging lodging, Integer newRating) {
+		if(lodging.getRating() == null) {
+			lodging.setRating(newRating.doubleValue());
+			lodging.setNumberOfRatings(1);
+			return lodging.getRating();
+		}
+
+		Double oldRating = lodging.getRating();
+		Integer oldCount = lodging.getNumberOfRatings();
+		lodging.setRating((oldRating * oldCount + newRating) / (oldCount + 1));
+		lodging.setNumberOfRatings(oldCount + 1);
+		lodgingRepository.save(lodging);
+		return lodging.getRating();
+	}
+
 }
