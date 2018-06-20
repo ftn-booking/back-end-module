@@ -30,7 +30,7 @@ public class Message {
 	@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
-	
+
 	@XmlElement(required = true)
 	@ManyToOne
 	@NotNull
@@ -40,20 +40,27 @@ public class Message {
 	@ManyToOne
 	@NotNull
 	private Reservation reservation;
-	
+
 	@XmlElement(required = true)
 	@NotNull
 	private String content;
-	
+
+	@XmlElement(required = true)
+	private boolean userSent;
+
 	public Message() {
-		
+
 	}
 
-	public Message(@NotNull ApplicationUser user, @NotNull Reservation reservation, @NotNull String content) {
+	public Message(@NotNull ApplicationUser user,
+			@NotNull Reservation reservation,
+			@NotNull String content,
+			boolean userSent) {
 		super();
 		this.user = user;
 		this.reservation = reservation;
 		this.content = content;
+		this.userSent = userSent;
 	}
 
 	public Long getId() {
@@ -87,6 +94,14 @@ public class Message {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	
+
+	public boolean isUserSent() {
+		return userSent;
+	}
+
+	public void setUserSent(boolean userSent) {
+		this.userSent = userSent;
+	}
+
+
 }
