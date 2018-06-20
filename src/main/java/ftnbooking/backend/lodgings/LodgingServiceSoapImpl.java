@@ -8,6 +8,8 @@ import javax.jws.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ftnbooking.backend.messages.Message;
+import ftnbooking.backend.messages.MessageService;
 import ftnbooking.backend.prices.Price;
 import ftnbooking.backend.prices.PriceService;
 import ftnbooking.backend.reservations.Reservation;
@@ -48,6 +50,9 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	
 	@Autowired
 	private ApplicationUserRepository applicationUserRepository;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	@Override
 	public Long addLodging(Lodging lodging) {
@@ -125,6 +130,16 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	@Override
 	public List<ApplicationUser> synchronizeApplicationUser() {
 		return applicationUserRepository.findAll();
+	}
+
+	@Override
+	public List<Message> synchronizeMessage(ApplicationUser user) {
+		return messageService.findByAgent(user);
+	}
+
+	@Override
+	public Long sendMessage(Message message) {
+		return messageService.add(message).getId();
 	}
 
 	

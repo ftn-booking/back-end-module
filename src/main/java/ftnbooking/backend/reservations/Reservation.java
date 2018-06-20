@@ -54,6 +54,9 @@ public class Reservation {
 	private long toDate;
 
 	@XmlElement(required = true)
+	private boolean approved;
+	
+	@XmlElement(required = true)
 	@Max(5)
 	@Min(1)
 	private Integer rating;
@@ -67,6 +70,7 @@ public class Reservation {
 		this.lodging = lodging;
 		this.fromDate = fromDate;
 		this.toDate = toDate;
+		this.approved = false;
 	}
 
 	public Long getId() {
@@ -125,4 +129,13 @@ public class Reservation {
 		this.rating = rating;
 	}
 
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
+
+	
 }
