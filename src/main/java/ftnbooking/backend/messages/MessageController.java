@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ftnbooking.backend.lodgings.LodgingService;
 import ftnbooking.backend.users.ApplicationUser;
 import ftnbooking.backend.users.ApplicationUserService;
 
@@ -22,8 +21,6 @@ public class MessageController {
 
 	@Autowired
 	private MessageService messageService;
-	@Autowired
-	private LodgingService lodgingService;
 	@Autowired
 	private MessageConverter messageConverter;
 	@Autowired

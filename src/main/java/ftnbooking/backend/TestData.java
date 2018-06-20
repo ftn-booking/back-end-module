@@ -1,7 +1,6 @@
 package ftnbooking.backend;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +13,8 @@ import ftnbooking.backend.comments.Comment;
 import ftnbooking.backend.comments.CommentService;
 import ftnbooking.backend.lodgings.Lodging;
 import ftnbooking.backend.lodgings.LodgingService;
+import ftnbooking.backend.messages.Message;
+import ftnbooking.backend.messages.MessageService;
 import ftnbooking.backend.prices.Price;
 import ftnbooking.backend.prices.PriceService;
 import ftnbooking.backend.reservations.Reservation;
@@ -47,6 +48,8 @@ public class TestData {
 	private PriceService priceService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private MessageService messageService;
 
 	@PostConstruct
 	private void init() {
@@ -173,6 +176,15 @@ public class TestData {
 		Comment comment4 = new Comment(user1, reservation1, "Nice view!");
 		comment4.setApproved(Approval.PENDING);
 		commentService.add(comment4);
+
+		Message message1 = new Message(user1, reservation1, "Hello agent", true);
+		messageService.add(message1);
+		Message message2 = new Message(user1, reservation1, "How are you Chewbacca?", false);
+		messageService.add(message2);
+		Message message3 = new Message(user1, reservation1, "RRRAARRWHHGWWR.", true);
+		messageService.add(message3);
+		Message message4 = new Message(user1, reservation1, "Of course", false);
+		messageService.add(message4);
 
 	}
 }
