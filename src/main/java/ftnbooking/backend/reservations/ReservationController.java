@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,6 +71,21 @@ public class ReservationController {
 		HashMap<String, Double> res = new HashMap<>();
 		res.put("newRating", ret);
 		return new ResponseEntity<>(res, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/{id:\\d+}")
+	public ResponseEntity<?> cancel(Principal principal,
+			@PathVariable Long id) {
+		ApplicationUser user = userService.findOne(principal.getName());
+
+		Reservation reservation = reservationService.findOne(id);
+		if(reservation == null)
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+		boolean ret = reservationService.delete(user, reservation);
+		if(!ret)
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }
