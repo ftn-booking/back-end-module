@@ -54,6 +54,9 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	@Autowired
 	private MessageService messageService;
 	
+	@Autowired
+	private LodgingService lodgingService;
+	
 	@Override
 	public Long addLodging(Lodging lodging) {
 		System.out.println(lodging.getAgent().getId());

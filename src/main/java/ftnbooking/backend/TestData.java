@@ -1,6 +1,8 @@
 package ftnbooking.backend;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -89,12 +91,12 @@ public class TestData {
 		featureTypeService.add(featureType1);
 		featureTypeService.add(featureType2);
 		featureTypeService.add(featureType3);
-		List<FeatureType> features1 = featureTypeService.findAll();
+		Set<FeatureType> features1 = new HashSet<>(featureTypeService.findAll());
 		FeatureType featureType4 = new FeatureType("Kitchen");
 		FeatureType featureType5 = new FeatureType("Bathroom");
 		featureTypeService.add(featureType4);
 		featureTypeService.add(featureType5);
-		List<FeatureType> features2 = featureTypeService.findAll();
+		Set<FeatureType> features2 = new HashSet<>(featureTypeService.findAll());
 
 
 		FoodServiceType foodServiceType1 = new FoodServiceType("Breakfast");

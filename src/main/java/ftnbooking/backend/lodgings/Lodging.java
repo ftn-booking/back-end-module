@@ -2,6 +2,7 @@ package ftnbooking.backend.lodgings;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
@@ -107,8 +108,8 @@ public class Lodging {
 
 */
 	@XmlElement(required = true)
-	@ManyToMany(cascade = CascadeType.REMOVE)
-	private List<FeatureType> featureType;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private Set<FeatureType> featureType;
 	
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -119,11 +120,11 @@ public class Lodging {
 	private LodgingType lodgingType;
 	
 	@XmlElement(required = true)
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> imagePaths = new ArrayList<String>();
 
 	@XmlElement(required = true)
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@NotNull
 	private ApplicationUser agent;
 
@@ -136,7 +137,7 @@ public class Lodging {
 			LodgingType lodgingType,
 			FoodServiceType foodServiceType,
 			int numberOfBeds,
-			List<FeatureType> featureType,
+			Set<FeatureType> featureType,
 			ApplicationUser agent) {
 		this.name = name;
 		this.address = address;
@@ -221,11 +222,11 @@ public class Lodging {
 		this.numberOfBeds = numberOfBeds;
 	}
 
-	public List<FeatureType> getFeatureType() {
+	public Set<FeatureType> getFeatureType() {
 		return featureType;
 	}
 
-	public void setFeatureType(List<FeatureType> featureType) {
+	public void setFeatureType(Set<FeatureType> featureType) {
 		this.featureType = featureType;
 	}
 
