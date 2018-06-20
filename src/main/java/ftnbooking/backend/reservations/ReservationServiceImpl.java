@@ -55,4 +55,13 @@ public class ReservationServiceImpl implements ReservationService {
 		return ret;
 	}
 
+	@Override
+	@Transactional(readOnly = false)
+	public boolean delete(ApplicationUser user, Reservation input) {
+		if(user.getId() != input.getUser().getId())
+			return false;
+		reservationRepository.delete(input);
+		return true;
+	}
+
 }

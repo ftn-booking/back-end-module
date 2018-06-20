@@ -16,4 +16,6 @@ public interface ReservationService {
 
 	Double addRating(ApplicationUser user, Reservation reservation, int newRating);
 
+	boolean delete(ApplicationUser user, Reservation input);
+
 }
