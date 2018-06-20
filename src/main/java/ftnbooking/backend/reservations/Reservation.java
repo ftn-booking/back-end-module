@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -51,6 +53,10 @@ public class Reservation {
 	@XmlElement(required = true)
 	private long toDate;
 
+	@XmlElement(required = true)
+	@Max(5)
+	@Min(1)
+	private Integer rating;
 	public Reservation() {}
 
 	public Reservation(ApplicationUser user,
@@ -109,6 +115,14 @@ public class Reservation {
 
 	public void setToDate(long toDate) {
 		this.toDate = toDate;
+	}
+
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(Integer rating) {
+		this.rating = rating;
 	}
 
 }
