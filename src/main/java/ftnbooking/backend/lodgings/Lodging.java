@@ -7,14 +7,11 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -41,7 +38,7 @@ import ftnbooking.backend.users.ApplicationUser;
 @XmlRootElement(name = "Lodging")
 @Entity
 public class Lodging {
-	
+
 	@XmlElement(required = true)
 	@Id
 	@GeneratedValue
@@ -81,7 +78,7 @@ public class Lodging {
 
 	@XmlElement(required = true)
 	private int numberOfRatings = 0;
-	
+
 	@XmlElement(required = true)
 	@Min(1)
 	private int numberOfBeds;
@@ -110,17 +107,17 @@ public class Lodging {
 	@XmlElement(required = true)
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private Set<FeatureType> featureType;
-	
+
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER)
 	private FoodServiceType foodServiceType;
-	
+
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER)
 	private LodgingType lodgingType;
-	
+
 	@XmlElement(required = true)
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection
 	private List<String> imagePaths = new ArrayList<String>();
 
 	@XmlElement(required = true)
@@ -266,5 +263,5 @@ public class Lodging {
 		this.numberOfRatings = numberOfRatings;
 	}
 
-	
+
 }
