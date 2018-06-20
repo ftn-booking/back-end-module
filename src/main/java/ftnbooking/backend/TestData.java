@@ -115,9 +115,9 @@ public class TestData {
 				2,
 				features1,
 				user3);
-		lodging1.addImagePath("img/placeholder.png");
-		lodging1.addImagePath("img/placeholder.png");
-		lodging1.addImagePath("img/placeholder.png");
+		lodging1.addImagePath("img/placeholder1.png");
+		lodging1.addImagePath("img/placeholder2.png");
+		lodging1.addImagePath("img/placeholder3.png");
 		lodging1.setRating(4.6);
 		lodging1.setNumberOfRatings(5);
 		lodgingService.add(lodging1);
@@ -131,8 +131,8 @@ public class TestData {
 				3,
 				features2,
 				user4);
-		lodging2.addImagePath("img/placeholder.png");
-		lodging2.addImagePath("img/placeholder.png");
+		lodging2.addImagePath("img/placeholder1.png");
+		lodging2.addImagePath("img/placeholder2.png");
 		lodgingService.add(lodging2);
 
 		// from 2018-01-01 - 2019-01-01

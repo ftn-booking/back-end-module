@@ -1,6 +1,7 @@
 package ftnbooking.backend.lodgings;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -117,8 +118,8 @@ public class Lodging {
 	private LodgingType lodgingType;
 
 	@XmlElement(required = true)
-	@ElementCollection
-	private List<String> imagePaths = new ArrayList<String>();
+	@ElementCollection(fetch = FetchType.EAGER)
+	private Set<String> imagePaths = new HashSet<String>();
 
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -227,11 +228,11 @@ public class Lodging {
 		this.featureType = featureType;
 	}
 
-	public List<String> getImagePaths() {
+	public Set<String> getImagePaths() {
 		return imagePaths;
 	}
 
-	public void setImagePaths(List<String> imagePaths) {
+	public void setImagePaths(Set<String> imagePaths) {
 		this.imagePaths = imagePaths;
 	}
 
