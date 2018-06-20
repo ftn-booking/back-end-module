@@ -14,4 +14,6 @@ public interface LodgingService {
 
 	Lodging add(Lodging input);
 
+	Double recalculateRating(Lodging lodging, Integer newRating);
+
 }

@@ -7,6 +7,7 @@ import javax.jws.WebService;
 import org.apache.cxf.annotations.SchemaValidation;
 import org.apache.cxf.annotations.SchemaValidation.SchemaValidationType;
 
+import ftnbooking.backend.messages.Message;
 import ftnbooking.backend.prices.Price;
 import ftnbooking.backend.reservations.Reservation;
 import ftnbooking.backend.types.FeatureType;
@@ -30,5 +31,8 @@ public interface LodgingServiceSoap {
 	List<FoodServiceType> synchronizeFoodServiceType();
 	List<Price> synchronizePrice(ApplicationUser agent);
 	Long addPrice(Price price);
-	//ostale su jos poruke i cenovnik
+	List<ApplicationUser> synchronizeApplicationUser();
+	List<Message> synchronizeMessage(ApplicationUser user);
+	Long sendMessage(Message message);
+	//ostale su jos poruke
 }

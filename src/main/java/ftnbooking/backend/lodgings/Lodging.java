@@ -76,8 +76,11 @@ public class Lodging {
 	@XmlElement(required = true)
 	@Max(5)
 	@Min(1)
-	private Integer rating;
+	private Double rating;
 
+	@XmlElement(required = true)
+	private int numberOfRatings = 0;
+	
 	@XmlElement(required = true)
 	@Min(1)
 	private int numberOfBeds;
@@ -202,11 +205,11 @@ public class Lodging {
 		this.lodgingType = lodgingType;
 	}
 
-	public Integer getRating() {
+	public Double getRating() {
 		return rating;
 	}
 
-	public void setRating(Integer rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
 	}
 
@@ -252,6 +255,14 @@ public class Lodging {
 
 	public void setFoodServiceType(FoodServiceType foodServiceType) {
 		this.foodServiceType = foodServiceType;
+	}
+
+	public int getNumberOfRatings() {
+		return numberOfRatings;
+	}
+
+	public void setNumberOfRatings(int numberOfRatings) {
+		this.numberOfRatings = numberOfRatings;
 	}
 
 	

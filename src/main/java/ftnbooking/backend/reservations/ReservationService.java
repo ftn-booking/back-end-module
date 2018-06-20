@@ -14,4 +14,6 @@ public interface ReservationService {
 
 	Reservation add(Reservation input);
 
+	Double addRating(ApplicationUser user, Reservation reservation, int newRating);
+
 }
