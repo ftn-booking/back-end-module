@@ -30,5 +30,6 @@ public interface LodgingServiceSoap {
 	List<FoodServiceType> synchronizeFoodServiceType();
 	List<Price> synchronizePrice(ApplicationUser agent);
 	Long addPrice(Price price);
+	List<ApplicationUser> synchronizeApplicationUser();
 	//ostale su jos poruke i cenovnik
 }

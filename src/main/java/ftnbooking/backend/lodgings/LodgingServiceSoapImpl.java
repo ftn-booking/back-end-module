@@ -19,6 +19,7 @@ import ftnbooking.backend.types.FoodServiceTypeRepository;
 import ftnbooking.backend.types.LodgingType;
 import ftnbooking.backend.types.LodgingTypeRepository;
 import ftnbooking.backend.users.ApplicationUser;
+import ftnbooking.backend.users.ApplicationUserRepository;
 
 @Service
 @WebService(endpointInterface = "ftnbooking.backend.lodgings.LodgingServiceSoap",
@@ -45,8 +46,15 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	@Autowired
 	private PriceService priceService;
 	
+	@Autowired
+	private ApplicationUserRepository applicationUserRepository;
+	
 	@Override
 	public Long addLodging(Lodging lodging) {
+		System.out.println(lodging.getAgent().getId());
+		ApplicationUser agent = applicationUserRepository.findByEmail(lodging.getAgent().getEmail());
+		System.out.println(agent.getId());
+		lodging.setAgent(agent);
 		lodgingRepository.save(lodging);
 		return lodging.getId();
 	}
@@ -112,6 +120,11 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	@Override
 	public Long addPrice(Price price) {
 		return priceService.add(price).getId();
+	}
+
+	@Override
+	public List<ApplicationUser> synchronizeApplicationUser() {
+		return applicationUserRepository.findAll();
 	}
 
 	
