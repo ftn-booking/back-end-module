@@ -11,6 +11,14 @@ public class UserDTO {
 	//private int accountState;
 	private Boolean isActive;
 	private Boolean isBanned;
+	private String pid;
+	
+	public String getPid() {
+		return pid;
+	}
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
 	public UserDTO() {
 		super();
 	}
@@ -33,6 +41,7 @@ public class UserDTO {
 		}*/
 		this.isActive = user.isActive();
 		this.isBanned = user.isBanned();
+		this.pid = user.getPid();
 	}
 	
 	

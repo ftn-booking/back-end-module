@@ -63,10 +63,12 @@ public class TestData {
 
 		ApplicationUser user3 = new ApplicationUser("han@me", "qweqwe", "Han", "Solo", "Corellia", null);
 		user3.setUserType(ApplicationUserType.AGENT);
+		user3.setPid("123456789");
 		userService.add(user3);
 
 		ApplicationUser user4 = new ApplicationUser("pot@me", "qweqwe", "Lennart", "Poettering", "Guatemala City", null);
 		user4.setUserType(ApplicationUserType.AGENT);
+		user4.setPid("987654321");
 		userService.add(user4);
 
 		ApplicationUser user5 = new ApplicationUser("ben@me", "qweqwe", "Ben", "Solo", "Chandrila", null);

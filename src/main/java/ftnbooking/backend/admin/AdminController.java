@@ -66,6 +66,7 @@ public class AdminController {
 	{
 		ApplicationUser user1 = new ApplicationUser(user.getEmail(), "defaultPassword",user.getName(), user.getLastname(), user.getCity(), user.getPhone());
 		user1.setUserType(ApplicationUserType.AGENT);
+		user1.setPid(user.getPid());
 		userRepository.save(user1);		 
 		
 		return new ResponseEntity<>( HttpStatus.OK);

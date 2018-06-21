@@ -6,18 +6,20 @@ public class NewAccountDTO {
     private String lastname;
     private String city;
     private String phone;
+    private String pid;
 
     public NewAccountDTO()
     {
     }
 
-    public NewAccountDTO(String email, String name, String lastname, String city, String phone)
+    public NewAccountDTO(String email, String name, String lastname, String city, String phone, String pid)
     {
         this.email = email;
         this.name = name;
         this.lastname = lastname;
         this.city = city;
         this.phone = phone;
+        this.pid =pid;
     }
 
 	public String getEmail() {
@@ -58,6 +60,14 @@ public class NewAccountDTO {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 
     

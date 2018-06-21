@@ -76,6 +76,9 @@ public class ApplicationUser {
 	private boolean banned = false;
 	@XmlElement(required = true)
 	private boolean active = true;
+	
+	@XmlElement()
+	private String pid;
 
 	@JsonIgnore
 	private String resetToken = UUID.randomUUID().toString();
@@ -212,6 +215,14 @@ public class ApplicationUser {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 
 	
