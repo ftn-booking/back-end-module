@@ -34,5 +34,6 @@ public interface LodgingServiceSoap {
 	List<ApplicationUser> synchronizeApplicationUser();
 	List<Message> synchronizeMessage(ApplicationUser user);
 	Long sendMessage(Message message);
+	boolean changePassword(ApplicationUser user);
 	//ostale su jos poruke
 }

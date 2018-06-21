@@ -145,5 +145,11 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 		return messageService.add(message).getId();
 	}
 
+	@Override
+	public boolean changePassword(ApplicationUser user) {
+		applicationUserRepository.save(user);
+		return true;
+	}
+
 	
 }
