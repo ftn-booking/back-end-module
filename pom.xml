@@ -61,6 +61,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+  			<groupId>org.apache.httpcomponents</groupId>
+  			<artifactId>httpclient</artifactId>
+  			<version>4.5.5</version>
+		</dependency>
+		<dependency>
 		    <groupId>org.apache.cxf</groupId>
 		    <artifactId>cxf-spring-boot-starter-jaxws</artifactId>
 		    <version>3.2.4</version>

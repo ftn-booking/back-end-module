@@ -73,7 +73,7 @@ private static String serviceUrl = "http://remote-rating-service.herokuapp.com";
 			HttpResponse response = client.execute(httpGet);
 			InputStream in=response.getEntity().getContent();
 			String body = IOUtils.toString(in);
-			//System.out.println(body);
+			System.out.println(body);
 			String[] splits = body.replace("[", "").replace("]", "").replace("\"", "").split(",");
 			for (String string : splits) 
 			{
@@ -94,7 +94,7 @@ private static String serviceUrl = "http://remote-rating-service.herokuapp.com";
 	{
 		try
 		{
-		HttpPost httppost = new HttpPost( "http://localhost:7145/ratingService/comments");
+		HttpPost httppost = new HttpPost( serviceUrl+"/ratingService/comments");
 		StringEntity params = new StringEntity(comment);
 		httppost.setEntity(params);
 		HttpClient client = HttpClients.createDefault();
