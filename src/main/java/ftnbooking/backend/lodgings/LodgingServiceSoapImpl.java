@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ftnbooking.backend.messages.Message;
+import ftnbooking.backend.messages.MessageRepository;
 import ftnbooking.backend.messages.MessageService;
 import ftnbooking.backend.prices.Price;
+import ftnbooking.backend.prices.PriceRepository;
 import ftnbooking.backend.prices.PriceService;
 import ftnbooking.backend.reservations.Reservation;
 import ftnbooking.backend.reservations.ReservationRepository;
@@ -49,7 +51,13 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	private PriceService priceService;
 	
 	@Autowired
+	private PriceRepository priceRepository;
+	
+	@Autowired
 	private ApplicationUserRepository applicationUserRepository;
+	
+	@Autowired
+	private MessageRepository messageRepository;
 	
 	@Autowired
 	private MessageService messageService;
@@ -127,7 +135,7 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 
 	@Override
 	public Long addPrice(Price price) {
-		return priceService.add(price).getId();
+		return priceRepository.save(price).getId();
 	}
 
 	@Override
@@ -148,6 +156,31 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	@Override
 	public boolean changePassword(ApplicationUser user) {
 		applicationUserRepository.save(user);
+		return true;
+	}
+
+	@Override
+	public boolean deleteLodging(Lodging lodging) {
+		if(reservationRepository.findByLodgingAndToDateLessThan(lodging, System.currentTimeMillis()).isEmpty()) {
+			List<Reservation> reservations = reservationRepository.findByLodging(lodging);
+			for(int i = 0; i < reservations.size(); i++) {
+				List<Message> messages = messageRepository.findByReservation(reservations.get(i));
+				messageRepository.deleteAll(messages);
+			}
+			reservationRepository.deleteAll(reservations);
+			List<Price> prices = priceService.findByLodging(lodging);
+			priceRepository.deleteAll(prices);
+			lodgingRepository.delete(lodging);
+			return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean deleteReservation(Reservation reservation) {
+		// TODO Auto-generated method stub
+		reservationRepository.delete(reservation);
 		return true;
 	}
 
