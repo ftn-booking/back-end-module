@@ -15,14 +15,14 @@ import org.apache.http.impl.client.HttpClients;
 import ftnbooking.backend.comments.Approval;
 
 public class RemoteCommentService {
-private static String serviceUrl = "http://localhost:7228";
+private static String serviceUrl = "http://remote-rating-service.herokuapp.com";
 	
 	public static boolean addProfanity(String profanity)
 	{
 		try
 		{
 			
-			HttpPost httppost = new HttpPost( "http://localhost:7145/ratingService/profanity");
+			HttpPost httppost = new HttpPost( serviceUrl+"/ratingService/profanity");
 			StringEntity params = new StringEntity(profanity);
 			httppost.setEntity(params);
 			HttpClient client = HttpClients.createDefault();
@@ -45,7 +45,7 @@ private static String serviceUrl = "http://localhost:7228";
 		try
 		{
 			
-			HttpPut httpput = new HttpPut( "http://localhost:7145/ratingService/profanity");
+			HttpPut httpput = new HttpPut(  serviceUrl+"/ratingService/profanity");
 			StringEntity params = new StringEntity(profanity);
 			httpput.setEntity(params);
 			HttpClient client = HttpClients.createDefault();
@@ -67,13 +67,13 @@ private static String serviceUrl = "http://localhost:7228";
 		
 		try
 		{
-			HttpGet httpGet = new HttpGet( "http://localhost:7145/ratingService/profanity");
+			HttpGet httpGet = new HttpGet(  serviceUrl+"/ratingService/profanity");
 			
 			HttpClient client = HttpClients.createDefault();
 			HttpResponse response = client.execute(httpGet);
 			InputStream in=response.getEntity().getContent();
 			String body = IOUtils.toString(in);
-			System.out.println(body);
+			//System.out.println(body);
 			String[] splits = body.replace("[", "").replace("]", "").split(",");
 			for (String string : splits) 
 			{

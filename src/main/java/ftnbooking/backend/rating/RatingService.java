@@ -19,7 +19,7 @@ import ftnbooking.backend.rating.contract.IRatingService;
 
 public class RatingService {
 
-	private static String serviceUrl = "http://localhost:7228";
+	private static String serviceUrl = "http://remote-rating-service.herokuapp.com";
 	public static double getGrade(RatingData ratingData)
 	{
 		double retVal = 0;
@@ -33,7 +33,7 @@ public class RatingService {
 		  //StringEntity entity = new StringEntity(inputXML, ContentType.create("text/json", Consts.UTF_8));
 		  //entity.setChunked(true);
 		  String json = ratingData.toJSON();
-		  HttpPost httppost = new HttpPost( "http://localhost:7145/ratingService/rating");
+		  HttpPost httppost = new HttpPost( serviceUrl +"/ratingService/rating");
 		  httppost.setHeader("Content-type", "application/json");
 		  StringEntity params = new StringEntity(json);
 		  httppost.setEntity(params);
