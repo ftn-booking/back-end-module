@@ -159,11 +159,11 @@ public class TestData {
 		priceService.add(price5);
 		priceService.add(price6);
 
-		Reservation reservation1 = new Reservation(user1, lodging2, 1534291200000l, 1535155200000l);
+		Reservation reservation1 = new Reservation(user1, lodging1, 1534291200000l, 1535155200000l);
 		reservation1.setApproved(true);
 		reservationService.add(reservation1);
 
-		Reservation reservation2 = new Reservation(user1, lodging1, 1539907200000l, 1540252800000l);
+		Reservation reservation2 = new Reservation(user1, lodging2, 1539907200000l, 1540252800000l);
 		reservationService.add(reservation2);
 
 		Comment comment1 = new Comment(user1, reservation1, "Nice place");
