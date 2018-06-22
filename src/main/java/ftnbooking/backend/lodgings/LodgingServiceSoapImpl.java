@@ -183,6 +183,12 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 		reservationRepository.delete(reservation);
 		return true;
 	}
+	
+	@Override
+	public boolean deletePrice(Price price) {
+		priceRepository.delete(price);
+		return true;
+	}
 
 	
 }

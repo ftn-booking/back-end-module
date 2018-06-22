@@ -37,4 +37,5 @@ public interface LodgingServiceSoap {
 	boolean changePassword(ApplicationUser user);
 	boolean deleteLodging(Lodging lodging);
 	boolean deleteReservation(Reservation reservation);
+	boolean deletePrice(Price price);
 }
