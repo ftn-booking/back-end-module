@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ftnbooking.backend.rating.RatingData;
+import ftnbooking.backend.rating.RatingService;
 import ftnbooking.backend.reservations.Reservation;
 import ftnbooking.backend.reservations.ReservationRepository;
 
@@ -68,10 +70,20 @@ public class LodgingServiceImpl implements LodgingService {
 			return lodging.getRating();
 		}
 
-		Double oldRating = lodging.getRating();
+		/*Double oldRating = lodging.getRating();
 		Integer oldCount = lodging.getNumberOfRatings();
 		lodging.setRating((oldRating * oldCount + newRating) / (oldCount + 1));
+		lodging.setNumberOfRatings(oldCount + 1);*/
+		
+		// Prebaceno na koriscenje RatingService modula, jedina izmena je sto se kalkulacija vrsi pomocu RatingService klase.
+		Double oldRating = lodging.getRating();
+		Integer oldCount = lodging.getNumberOfRatings();
+		lodging.setRating(RatingService.getGrade(new RatingData(oldRating,oldCount ,newRating)));
 		lodging.setNumberOfRatings(oldCount + 1);
+		
+		
+		
+		
 		lodgingRepository.save(lodging);
 		return lodging.getRating();
 	}

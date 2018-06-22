@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftnbooking.backend.lodgings.Lodging;
 import ftnbooking.backend.lodgings.LodgingService;
+import ftnbooking.backend.rating.RemoteCommentService;
 import ftnbooking.backend.users.ApplicationUser;
 import ftnbooking.backend.users.ApplicationUserService;
 
@@ -51,7 +52,7 @@ public class CommentController {
 		Comment comment = commentConverter.fromDTO(user, dto);
 		if(comment == null)
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
+		comment.setApproved(RemoteCommentService.checkComment(comment.getContent()));
 		Comment ret = commentService.add(comment);
 		if(ret == null)
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
