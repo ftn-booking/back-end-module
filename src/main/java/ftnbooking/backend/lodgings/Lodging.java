@@ -106,7 +106,7 @@ public class Lodging {
 
 */
 	@XmlElement(required = true)
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	private Set<FeatureType> featureType;
 
 	@XmlElement(required = true)
