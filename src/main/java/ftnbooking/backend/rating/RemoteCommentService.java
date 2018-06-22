@@ -74,7 +74,7 @@ private static String serviceUrl = "http://remote-rating-service.herokuapp.com";
 			InputStream in=response.getEntity().getContent();
 			String body = IOUtils.toString(in);
 			//System.out.println(body);
-			String[] splits = body.replace("[", "").replace("]", "").split(",");
+			String[] splits = body.replace("[", "").replace("]", "").replace("\"", "").split(",");
 			for (String string : splits) 
 			{
 				retVal.add(string.trim());

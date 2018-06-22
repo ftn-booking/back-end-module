@@ -1,5 +1,6 @@
 package ftnbooking.backend.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ftnbooking.backend.rating.RemoteCommentService;
 
 @RestController
-@RequestMapping("/admin/profanity")
+@RequestMapping("/api/admin/profanity")
 public class ProfanityController {
 
 	@RequestMapping(method = RequestMethod.POST  )
@@ -29,10 +30,12 @@ public class ProfanityController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	@RequestMapping(method = RequestMethod.GET  )
-	public ResponseEntity<List<String>> getProfanities(@RequestBody String profanity) 
+	public ResponseEntity<List<String>> getProfanities() 
 	{
-		RemoteCommentService.removeProfanity(profanity);
-		return new ResponseEntity<>(HttpStatus.OK);
+		ArrayList<String> retVal = new ArrayList<>();
+		
+		retVal = RemoteCommentService.getProfanities();
+		return new ResponseEntity<List<String>>(retVal, HttpStatus.OK);
 	}
 	
 }
