@@ -14,6 +14,7 @@ import ftnbooking.backend.types.FeatureType;
 import ftnbooking.backend.types.FoodServiceType;
 import ftnbooking.backend.types.LodgingType;
 import ftnbooking.backend.users.ApplicationUser;
+import ftnbooking.backend.users.ChangePasswordDTO;
 
 
 @WebService(name = "LodgingServiceSoap", targetNamespace = "https://backend.ftnbooking/lodgingServiceSoap")
@@ -34,7 +35,7 @@ public interface LodgingServiceSoap {
 	List<ApplicationUser> synchronizeApplicationUser();
 	List<Message> synchronizeMessage(ApplicationUser user);
 	Long sendMessage(Message message);
-	boolean changePassword(ApplicationUser user);
+	boolean changePassword(String email, ChangePasswordDTO cpDto);
 	boolean deleteLodging(Lodging lodging);
 	boolean deleteReservation(Reservation reservation);
 	boolean deletePrice(Price price);

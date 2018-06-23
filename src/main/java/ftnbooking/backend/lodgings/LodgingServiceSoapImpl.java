@@ -24,6 +24,8 @@ import ftnbooking.backend.types.LodgingType;
 import ftnbooking.backend.types.LodgingTypeRepository;
 import ftnbooking.backend.users.ApplicationUser;
 import ftnbooking.backend.users.ApplicationUserRepository;
+import ftnbooking.backend.users.ApplicationUserService;
+import ftnbooking.backend.users.ChangePasswordDTO;
 
 @Service
 @WebService(endpointInterface = "ftnbooking.backend.lodgings.LodgingServiceSoap",
@@ -64,6 +66,9 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	
 	@Autowired
 	private LodgingService lodgingService;
+	
+	@Autowired
+	private ApplicationUserService applicationUserService;
 	
 	@Override
 	public Long addLodging(Lodging lodging) {
@@ -154,8 +159,8 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	}
 
 	@Override
-	public boolean changePassword(ApplicationUser user) {
-		applicationUserRepository.save(user);
+	public boolean changePassword(String email, ChangePasswordDTO cpDto) {
+		applicationUserService.changePassword(email, cpDto);
 		return true;
 	}
 

@@ -2,17 +2,28 @@ package ftnbooking.backend.users;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-public class ChangePasswordDTO {
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
 
+})
+@XmlRootElement(name = "ChangePasswordDTO")
+public class ChangePasswordDTO {
+	@XmlElement(required = true)
 	@Size(min = 6)
 	@NotEmpty
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String oldPassword;
 
+	@XmlElement(required = true)
 	@Size(min = 6)
 	@NotEmpty
 	@JsonProperty(access = Access.WRITE_ONLY)
