@@ -46,8 +46,8 @@ public class Lodging {
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
 
-	@Version
-	private Long version;
+	/*@Version
+	private Long version;*/
 
 	@XmlElement(required = true)
 	@Pattern(regexp = "(?U)[\\p{Alpha}\\h]*")
@@ -156,13 +156,13 @@ public class Lodging {
 		this.id = id;
 	}
 
-	public Long getVersion() {
+	/*public Long getVersion() {
 		return version;
 	}
 
 	public void setVersion(Long version) {
 		this.version = version;
-	}
+	}*/
 
 	public String getName() {
 		return name;
@@ -262,6 +262,15 @@ public class Lodging {
 
 	public void setNumberOfRatings(int numberOfRatings) {
 		this.numberOfRatings = numberOfRatings;
+	}
+
+	@Override
+	public String toString() {
+		return "Lodging [id=" + id + /*", version=" + version +*/ ", name=" + name + ", address=" + address
+				+ ", description=" + description + ", category=" + category + ", rating=" + rating
+				+ ", numberOfRatings=" + numberOfRatings + ", numberOfBeds=" + numberOfBeds + ", featureType="
+				+ featureType + ", foodServiceType=" + foodServiceType + ", lodgingType=" + lodgingType
+				+ ", imagePaths=" + imagePaths + ", agent=" + agent + "]";
 	}
 
 

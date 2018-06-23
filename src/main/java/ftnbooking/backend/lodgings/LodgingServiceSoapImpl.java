@@ -2,11 +2,13 @@ package ftnbooking.backend.lodgings;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import ftnbooking.backend.messages.Message;
 import ftnbooking.backend.messages.MessageRepository;
@@ -73,11 +75,29 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 	@Override
 	public Long addLodging(Lodging lodging) {
 		System.out.println(lodging.getAgent().getId());
+		System.out.println(lodging);
 		ApplicationUser agent = applicationUserRepository.findByEmail(lodging.getAgent().getEmail());
-		System.out.println(agent.getId());
-		lodging.setAgent(agent);
-		lodgingRepository.save(lodging);
-		return lodging.getId();
+		if(lodging.getId()!= null) {
+					System.out.println(agent.getId());
+			lodging.setAgent(agent);
+			lodgingRepository.save(lodging);
+			return lodging.getId();
+		}
+		Optional<Lodging> opt = lodgingRepository.findById(lodging.getId());
+		Lodging lo = opt.get();
+		lo.setAddress(lodging.getAddress());
+		lo.setAgent(agent);
+		lo.setCategory(lodging.getCategory());
+		lo.setDescription(lodging.getDescription());
+		lo.setFeatureType(lodging.getFeatureType());
+		lo.setFoodServiceType(lodging.getFoodServiceType());
+		lo.setImagePaths(lodging.getImagePaths());
+		lo.setName(lodging.getName());
+		lo.setNumberOfBeds(lodging.getNumberOfBeds());
+		lo.setNumberOfRatings(0);
+		lo.setRating(null);
+		lodgingService.add(lo);
+		return lo.getId();
 	}
 
 	@Override
