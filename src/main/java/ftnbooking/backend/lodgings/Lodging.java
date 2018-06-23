@@ -47,8 +47,8 @@ public class Lodging {
 	private Long id;
 
 	/*@Version
-	private Long version;*/
-
+	private Long version;
+*/
 	@XmlElement(required = true)
 	@Pattern(regexp = "(?U)[\\p{Alpha}\\h]*")
 	@NotBlank
@@ -266,7 +266,7 @@ public class Lodging {
 
 	@Override
 	public String toString() {
-		return "Lodging [id=" + id + /*", version=" + version +*/ ", name=" + name + ", address=" + address
+		return "Lodging [id=" + id +/* ", version=" + version + */", name=" + name + ", address=" + address
 				+ ", description=" + description + ", category=" + category + ", rating=" + rating
 				+ ", numberOfRatings=" + numberOfRatings + ", numberOfBeds=" + numberOfBeds + ", featureType="
 				+ featureType + ", foodServiceType=" + foodServiceType + ", lodgingType=" + lodgingType

@@ -77,7 +77,7 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 		System.out.println(lodging.getAgent().getId());
 		System.out.println(lodging);
 		ApplicationUser agent = applicationUserRepository.findByEmail(lodging.getAgent().getEmail());
-		if(lodging.getId()!= null) {
+		if(lodging.getId()== null) {
 					System.out.println(agent.getId());
 			lodging.setAgent(agent);
 			lodgingRepository.save(lodging);
@@ -85,6 +85,7 @@ public class LodgingServiceSoapImpl implements LodgingServiceSoap{
 		}
 		Optional<Lodging> opt = lodgingRepository.findById(lodging.getId());
 		Lodging lo = opt.get();
+		System.out.println(lo);
 		lo.setAddress(lodging.getAddress());
 		lo.setAgent(agent);
 		lo.setCategory(lodging.getCategory());
