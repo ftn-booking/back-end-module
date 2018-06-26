@@ -34,6 +34,10 @@ public class PrivilegeData {
 		privilegeService.add(new Privilege("ADD_RESERVATION", ApplicationUserType.VISITOR));
 		privilegeService.add(new Privilege("RATE_RESERVATION", ApplicationUserType.VISITOR));
 		privilegeService.add(new Privilege("CANCEL_RESERVATION", ApplicationUserType.VISITOR));
+
+		privilegeService.add(new Privilege("GET_LODGING_TYPES", ApplicationUserType.VISITOR));
+		privilegeService.add(new Privilege("GET_FOOD_TYPES", ApplicationUserType.VISITOR));
+		privilegeService.add(new Privilege("GET_FEATURE_TYPES", ApplicationUserType.VISITOR));
 	}
 
 }

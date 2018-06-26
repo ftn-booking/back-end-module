@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ public class TypeController {
 	@Autowired
 	private FeatureTypeService featureTypeService;
 
-
+	@PreAuthorize("hasAuthority('GET_LODGING_TYPES')")
 	@GetMapping("/lodging")
 	public ResponseEntity<List<LodgingType>> getLodgingTypes() {
 		List<LodgingType> lodgingTypes = lodgingTypeService.findAll();
@@ -29,6 +30,7 @@ public class TypeController {
 		return new ResponseEntity<>(lodgingTypes, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('GET_FOOD_TYPES')")
 	@GetMapping("/food")
 	public ResponseEntity<List<FoodServiceType>> getFoodTypes() {
 		List<FoodServiceType> foodTypes = foodTypeService.findAll();
@@ -37,6 +39,7 @@ public class TypeController {
 		return new ResponseEntity<>(foodTypes, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('GET_FEATURE_TYPES')")
 	@GetMapping("/feature")
 	public ResponseEntity<List<FeatureType>> getFeatureTypes() {
 		List<FeatureType> featureTypes = featureTypeService.findAll();
