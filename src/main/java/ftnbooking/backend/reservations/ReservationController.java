@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ public class ReservationController {
 	@Autowired
 	private ReservationConverter reservationConverter;
 
+	@PreAuthorize("hasAuthority('GET_USERS_RESERVATIONS')")
 	@GetMapping("/me")
 	public ResponseEntity<List<Reservation>> getUsersReservations(Principal principal) {
 		ApplicationUser user = userService.findOne(principal.getName());
@@ -40,6 +42,7 @@ public class ReservationController {
 		return new ResponseEntity<>(reservations, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('ADD_RESERVATION')")
 	@PostMapping
 	public ResponseEntity<Reservation> add(Principal principal,
 			@RequestBody ReservationDTO dto) {
@@ -55,6 +58,7 @@ public class ReservationController {
 		return new ResponseEntity<>(reserved, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('RATE_RESERVATION')")
 	@PutMapping("/{id:\\d+}/rate/{rating:[1-5]}")
 	public ResponseEntity<?> rate(Principal principal,
 			@PathVariable Long id,
@@ -73,6 +77,7 @@ public class ReservationController {
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('CANCEL_RESERVATION')")
 	@DeleteMapping("/{id:\\d+}")
 	public ResponseEntity<?> cancel(Principal principal,
 			@PathVariable Long id) {

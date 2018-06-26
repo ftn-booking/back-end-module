@@ -29,6 +29,11 @@ public class PrivilegeData {
 
 		privilegeService.add(new Privilege("GET_PRICES_FOR_LODGING", ApplicationUserType.VISITOR));
 		privilegeService.add(new Privilege("GET_ACTIVE_PRICE", ApplicationUserType.VISITOR));
+
+		privilegeService.add(new Privilege("GET_USERS_RESERVATIONS", ApplicationUserType.VISITOR));
+		privilegeService.add(new Privilege("ADD_RESERVATION", ApplicationUserType.VISITOR));
+		privilegeService.add(new Privilege("RATE_RESERVATION", ApplicationUserType.VISITOR));
+		privilegeService.add(new Privilege("CANCEL_RESERVATION", ApplicationUserType.VISITOR));
 	}
 
 }
