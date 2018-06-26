@@ -38,6 +38,19 @@ public class PrivilegeData {
 		privilegeService.add(new Privilege("GET_LODGING_TYPES", ApplicationUserType.VISITOR));
 		privilegeService.add(new Privilege("GET_FOOD_TYPES", ApplicationUserType.VISITOR));
 		privilegeService.add(new Privilege("GET_FEATURE_TYPES", ApplicationUserType.VISITOR));
+		
+		privilegeService.add(new Privilege("UPDATE_REGISTRIES", ApplicationUserType.ADMIN));
+		privilegeService.add(new Privilege("GET_REGISTRIES", ApplicationUserType.ADMIN));
+		privilegeService.add(new Privilege("APPROVE_COMMENTS", ApplicationUserType.ADMIN));
+		privilegeService.add(new Privilege("GET_COMMENTS", ApplicationUserType.ADMIN));
+		
+		privilegeService.add(new Privilege("MODIFY_USERS", ApplicationUserType.ADMIN));
+		privilegeService.add(new Privilege("GET_USERS", ApplicationUserType.ADMIN));
+		privilegeService.add(new Privilege("ADD_USERS", ApplicationUserType.ADMIN));
+		
+		privilegeService.add(new Privilege("UPDATE_REGISTRIES", ApplicationUserType.ADMIN));
+		privilegeService.add(new Privilege("GET_PROFANITIES", ApplicationUserType.ADMIN));
+		
 	}
 
 }

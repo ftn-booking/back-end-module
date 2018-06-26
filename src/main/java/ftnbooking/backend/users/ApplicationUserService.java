@@ -1,5 +1,6 @@
 package ftnbooking.backend.users;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ApplicationUserService {

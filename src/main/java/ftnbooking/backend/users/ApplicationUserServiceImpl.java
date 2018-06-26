@@ -23,7 +23,8 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 	public ApplicationUser findOne(Long id) {
 		return userRepository.findById(id).orElse(null);
 	}
-
+	
+	
 	@Override
 	public ApplicationUser findOne(String email) {
 		return userRepository.findByEmail(email);

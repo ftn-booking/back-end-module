@@ -1,11 +1,13 @@
 package ftnbooking.backend.admin;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,10 +19,14 @@ import ftnbooking.backend.types.FoodServiceType;
 import ftnbooking.backend.types.FoodServiceTypeService;
 import ftnbooking.backend.types.LodgingType;
 import ftnbooking.backend.types.LodgingTypeService;
+import ftnbooking.logging.LoggerManager;
 
 @RestController
 @RequestMapping("/api/registry")
 public class RegistryController {
+	
+	@Autowired
+	private LoggerManager logger;
 	
 	@Autowired
 	private LodgingTypeService lodgingTypeService;
@@ -30,8 +36,9 @@ public class RegistryController {
 	@Autowired
 	private FoodServiceTypeService foodServiceTypeService;
 
+	@PreAuthorize("hasAuthority('GET_REGISTRIES')")
 	@RequestMapping(method = RequestMethod.GET, value="/lodging")
-	public ResponseEntity<List<RegistryItemDTO>> getLodgings() 
+	public ResponseEntity<List<RegistryItemDTO>> getLodgings(Principal principal) 
 	{
 		List<RegistryItemDTO> retVal = new ArrayList<RegistryItemDTO>();
 		
@@ -43,8 +50,9 @@ public class RegistryController {
 		return new ResponseEntity<List<RegistryItemDTO>>(retVal, HttpStatus.OK);
 	
 	}
+	@PreAuthorize("hasAuthority('GET_REGISTRIES')")
 	@RequestMapping(method = RequestMethod.GET, value="/feature")
-	public ResponseEntity<List<RegistryItemDTO>> getFeatures() 
+	public ResponseEntity<List<RegistryItemDTO>> getFeatures(Principal principal) 
 	{
 		List<RegistryItemDTO> retVal = new ArrayList<RegistryItemDTO>();
 		
@@ -55,8 +63,9 @@ public class RegistryController {
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	
 	}
+	@PreAuthorize("hasAuthority('GET_REGISTRIES')")
 	@RequestMapping(method = RequestMethod.GET, value="/food")
-	public ResponseEntity<List<RegistryItemDTO>> getFoods() 
+	public ResponseEntity<List<RegistryItemDTO>> getFoods(Principal principal) 
 	{
 		List<RegistryItemDTO> retVal = new ArrayList<RegistryItemDTO>();
 		
@@ -67,9 +76,12 @@ public class RegistryController {
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	
 	}
+	@PreAuthorize("hasAuthority('UPDATE_REGISTRIES')")
 	@RequestMapping(method = RequestMethod.POST, value="/lodgingRegistry")
-	public ResponseEntity<?> addLodging(@RequestBody RegistryItemDTO registryItemDTO) 
+	public ResponseEntity<?> addLodging(@RequestBody RegistryItemDTO registryItemDTO, Principal principal) 
 	{
+		String registry = "LODGING";
+		String action;
 		long id =0;
 		try
 		{
@@ -85,6 +97,7 @@ public class RegistryController {
 			lodgingType.setName(registryItemDTO.getName());
 			lodgingType.setActive(true);	
 			lodgingTypeService.add(lodgingType);
+			action = "ADDED";
 		}else
 		{
 			
@@ -92,14 +105,19 @@ public class RegistryController {
 			
 			lodgingType.setActive(registryItemDTO.isActive());	
 			lodgingTypeService.add(lodgingType);
-			
+			action="DEACTIVATED";
 		}
+		
+		logger.logAdmin(action+" "+ registryItemDTO.getName().toUpperCase() + " TO " + registry + "REGISTRY ", principal.getName());
+		
 		return new ResponseEntity<>( HttpStatus.OK);
 	}
-	
+	@PreAuthorize("hasAuthority('UPDATE_REGISTRIES')")
 	@RequestMapping(method = RequestMethod.POST, value="/featureRegistry")
-	public ResponseEntity<?> addFeature(@RequestBody RegistryItemDTO registryItemDTO) 
+	public ResponseEntity<?> addFeature(@RequestBody RegistryItemDTO registryItemDTO, Principal principal) 
 	{
+		String registry = "FEATURE";
+		String action;
 		long id =0;
 		try
 		{
@@ -115,6 +133,7 @@ public class RegistryController {
 			featureType.setName(registryItemDTO.getName());
 			featureType.setActive(true);	
 			featureTypeService.add(featureType);
+			action = "ADDED";
 		}else
 		{
 			
@@ -122,13 +141,18 @@ public class RegistryController {
 			
 			featureType.setActive(registryItemDTO.isActive());	
 			featureTypeService.add(featureType);
+			action="DEACTIVATED";
 			
 		}
+		logger.logAdmin(action+" "+ registryItemDTO.getName().toUpperCase() + " TO " + registry + "REGISTRY ", principal.getName());
 		return new ResponseEntity<>( HttpStatus.OK);
 	}
+	@PreAuthorize("hasAuthority('UPDATE_REGISTRIES')")
 	@RequestMapping(method = RequestMethod.POST, value="/foodRegistry")
-	public ResponseEntity<?> addFood(@RequestBody RegistryItemDTO registryItemDTO) 
+	public ResponseEntity<?> addFood(@RequestBody RegistryItemDTO registryItemDTO, Principal principal) 
 	{
+		String registry = "FOOD";
+		String action;
 		long id =0;
 		try
 		{
@@ -144,6 +168,7 @@ public class RegistryController {
 			foodServiceType.setName(registryItemDTO.getName());
 			foodServiceType.setActive(true);	
 			foodServiceTypeService.add(foodServiceType);
+			action = "ADDED";
 		}else
 		{
 			
@@ -151,28 +176,12 @@ public class RegistryController {
 			
 			foodServiceType.setActive(registryItemDTO.isActive());	
 			foodServiceTypeService.add(foodServiceType);
+			action="DEACTIVATED";
 			
 		}
-		return new ResponseEntity<>( HttpStatus.OK);
-	}
-	/*@RequestMapping(method = RequestMethod.PUT, value="/lodgingRegistry")
-	public ResponseEntity<?> updateLodging(@RequestBody RegistryItemDTO registryItemDTO) 
-	{
-		LodgingType lodgingType = new LodgingType();
-		lodgingType.setId(registryItemDTO.getId());
-		lodgingType.setActive(true);	
-		lodgingTypeService.add(lodgingType);
+		logger.logAdmin(action+" "+ registryItemDTO.getName().toUpperCase() + " TO " + registry + "REGISTRY ", principal.getName());
 		return new ResponseEntity<>( HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value="/featureRegistry")
-	public ResponseEntity<?> updateFeature(@RequestBody RegistryItemDTO registryItemDTO) 
-	{
-		FeatureType featureType = new FeatureType();
-		featureType.setId(registryItemDTO.getId());
-		featureType.setActive(true);	
-		featureTypeService.add(featureType);
-		return new ResponseEntity<>( HttpStatus.OK);
-	}*/
 
 }

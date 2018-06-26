@@ -14,11 +14,13 @@ import org.apache.wss4j.dom.WSConstants;
 import org.apache.wss4j.dom.handler.WSHandlerConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import ftnbooking.backend.lodgings.LodgingServiceSoap;
 
 @Configuration
+@ComponentScan("ftnbooking.logging")
 public class CXFConfig {
 
 	@Autowired

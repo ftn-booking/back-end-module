@@ -85,7 +85,26 @@ public class UserDTO {
 	}
 	
 	
-
+	public String toLog()
+	{
+		StringBuilder retVal = new StringBuilder();
+		
+		if(isActive)
+		{
+			retVal.append("ACTIVE ");
+		}else
+		{
+			retVal.append("NOT ACTIVE ");
+		}
+		if(isBanned)
+		{
+			retVal.append("BANNED ");
+		}else
+		{
+			retVal.append("NOT BANNED ");
+		}
+		return retVal.toString();
+	}
 	
 	
 }
