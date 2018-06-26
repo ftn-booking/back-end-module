@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ftnbooking.backend.security.SecurityConstants;
+
 @Transactional(readOnly = true)
 @Service
 public class ApplicationUserServiceImpl implements ApplicationUserService {
@@ -76,6 +78,8 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 	@Transactional(readOnly = false)
 	public void failedLogin(ApplicationUser user) {
 		user.incrementFailedLoginAttempts();
+		if(user.getFailedLoginAttempts() >= SecurityConstants.MAX_FAILED_ATTEMPTS)
+			user.setBanned(true);
 		userRepository.save(user);
 	}
 
