@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,7 @@ public class CommentController {
 	@Autowired
 	private ApplicationUserService userService;
 
+	@PreAuthorize("hasAuthority('GET_COMMENTS')")
 	@GetMapping("/lodging/{id:\\d+}")
 	public ResponseEntity<List<Comment>> getComments(@PathVariable Long id) {
 		Lodging lodging = lodgingService.findOne(id);
@@ -44,6 +46,7 @@ public class CommentController {
 		return new ResponseEntity<>(comments, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('ADD_COMMENT')")
 	@PostMapping
 	public ResponseEntity<Comment> addComment(Principal principal,
 			@RequestBody CommentDTO dto) {
