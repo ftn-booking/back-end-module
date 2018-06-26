@@ -3,7 +3,6 @@ package ftnbooking.backend.security;
 import java.util.Arrays;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,12 +34,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 			.headers().frameOptions().sameOrigin()
 			.and()
 			.authorizeRequests()
-				.antMatchers(HttpMethod.POST, SecurityConstants.REGISTRATION_URL).permitAll()
-				.antMatchers(SecurityConstants.REGISTRATION_URL + "/reset/**").permitAll()
 				.antMatchers("/h2/**").permitAll()
-				.antMatchers(HttpMethod.GET).permitAll()
-				.antMatchers(HttpMethod.POST).permitAll()
-				.anyRequest().authenticated()
 			.and()
 			.addFilter(new JWTAuthenticationFilter(authenticationManager()))
 			.addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService))
