@@ -23,6 +23,9 @@ public class PrivilegeData {
 		privilegeService.add(new Privilege("GET_LODGINGS", ApplicationUserType.VISITOR));
 		privilegeService.add(new Privilege("GET_LODGING", ApplicationUserType.VISITOR));
 		privilegeService.add(new Privilege("GET_AVAILABLE_LODGINGS", ApplicationUserType.VISITOR));
+
+		privilegeService.add(new Privilege("GET_MESSAGES", ApplicationUserType.VISITOR));
+		privilegeService.add(new Privilege("ADD_MESSAGE", ApplicationUserType.VISITOR));
 	}
 
 }
