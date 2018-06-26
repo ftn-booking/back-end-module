@@ -50,6 +50,9 @@ public class ApplicationUser {
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 
+	@JsonIgnore
+	private int failedLoginAttempts = 0;
+
 	@XmlElement(required = true)
 	@Pattern(regexp = "(?U)\\p{Alpha}*")
 	private String name;
@@ -151,6 +154,18 @@ public class ApplicationUser {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public int getFailedLoginAttempts() {
+		return failedLoginAttempts;
+	}
+
+	public void setFailedLoginAttempts(int failedLoginAttempts) {
+		this.failedLoginAttempts = failedLoginAttempts;
+	}
+
+	public void incrementFailedLoginAttempts() {
+		++this.failedLoginAttempts;
 	}
 
 	public String getName() {

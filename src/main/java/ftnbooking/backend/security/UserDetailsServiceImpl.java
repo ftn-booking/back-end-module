@@ -27,6 +27,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}
 		return new User(applicationUser.getEmail(),
 				applicationUser.getPassword(),
+				applicationUser.getFailedLoginAttempts() < SecurityConstants.MAX_FAILED_ATTEMPTS,
+				true, true, true,
 				AuthorityUtils.createAuthorityList(applicationUser.getUserType().toString()));
 	}
 

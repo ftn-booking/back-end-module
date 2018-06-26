@@ -72,4 +72,18 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 		return newPassword;
 	}
 
+	@Override
+	@Transactional(readOnly = false)
+	public void failedLogin(ApplicationUser user) {
+		user.incrementFailedLoginAttempts();
+		userRepository.save(user);
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public void successfulLogin(ApplicationUser user) {
+		user.setFailedLoginAttempts(0);
+		userRepository.save(user);
+	}
+
 }

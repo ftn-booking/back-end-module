@@ -7,5 +7,6 @@ public class SecurityConstants {
 	public static final String TOKEN_PREFIX = "Bearer ";
 	public static final String HEADER_STRING = "Authorization";
 	public static final String REGISTRATION_URL = "/api/authentication";
+	public static final int MAX_FAILED_ATTEMPTS = 10;
 
 }

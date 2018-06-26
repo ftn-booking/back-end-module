@@ -18,4 +18,8 @@ public interface ApplicationUserService {
 
 	String resetPassword(ApplicationUser forUser);
 
+	void failedLogin(ApplicationUser user);
+
+	void successfulLogin(ApplicationUser user);
+
 }
