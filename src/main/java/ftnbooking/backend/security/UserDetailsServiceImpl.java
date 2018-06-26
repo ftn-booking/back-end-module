@@ -28,7 +28,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return new User(applicationUser.getEmail(),
 				applicationUser.getPassword(),
 				!applicationUser.isBanned(),
-				true, true, true,
+				true, true,
+				applicationUser.isActive(),
 				AuthorityUtils.createAuthorityList(applicationUser.getUserType().toString()));
 	}
 

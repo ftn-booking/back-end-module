@@ -78,8 +78,10 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 	@Transactional(readOnly = false)
 	public void failedLogin(ApplicationUser user) {
 		user.incrementFailedLoginAttempts();
-		if(user.getFailedLoginAttempts() >= SecurityConstants.MAX_FAILED_ATTEMPTS)
+		if(user.getFailedLoginAttempts() >= SecurityConstants.MAX_FAILED_ATTEMPTS) {
 			user.setBanned(true);
+			user.setFailedLoginAttempts(0);
+		}
 		userRepository.save(user);
 	}
 
