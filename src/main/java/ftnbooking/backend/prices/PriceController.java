@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class PriceController {
 	@Autowired
 	private LodgingService lodgingService;
 
+	@PreAuthorize("hasAuthority('GET_PRICES_FOR_LODGING')")
 	@GetMapping("/{id:\\d+}")
 	public ResponseEntity<List<Price>> getPricesForLodging(@PathVariable Long id) {
 		Lodging lodging = lodgingService.findOne(id);
@@ -33,6 +35,7 @@ public class PriceController {
 		return new ResponseEntity<>(prices, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('GET_ACTIVE_PRICE')")
 	@GetMapping("/{id:\\d+}/from/{fromDate:\\d+}")
 	public ResponseEntity<List<Price>> getActivePrice(@PathVariable Long id, @PathVariable Long fromDate) {
 		Lodging lodging = lodgingService.findOne(id);
