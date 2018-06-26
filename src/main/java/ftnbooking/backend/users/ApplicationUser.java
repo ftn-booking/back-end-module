@@ -45,7 +45,7 @@ public class ApplicationUser {
 	private String email;
 
 	@XmlElement(required = true)
-	@Size(min = 6)
+	@Size(min = 8)
 	@NotEmpty
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
@@ -70,13 +70,13 @@ public class ApplicationUser {
 	@Enumerated(EnumType.STRING)
 	@JsonProperty(access = Access.READ_ONLY)
 	private ApplicationUserType userType = ApplicationUserType.VISITOR;
-	
-	
+
+
 	@XmlElement(required = true)
 	private boolean banned = false;
 	@XmlElement(required = true)
 	private boolean active = true;
-	
+
 	@XmlElement()
 	private String pid;
 
@@ -102,7 +102,7 @@ public class ApplicationUser {
 		this.banned=banned;
 		this.active=active;
 	}
-	
+
 
 	public ApplicationUser(String email,
 			String password,
@@ -118,7 +118,7 @@ public class ApplicationUser {
 		this.city = city;
 		this.phoneNumber = phoneNumber;
 		this.active=true;
-		
+
 	}
 
 	public Long getId() {
@@ -225,6 +225,6 @@ public class ApplicationUser {
 		this.pid = pid;
 	}
 
-	
+
 }
 

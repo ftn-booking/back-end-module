@@ -53,33 +53,33 @@ public class TestData {
 
 	@PostConstruct
 	private void init() {
-		ApplicationUser user1 = new ApplicationUser("ch@me", "qweqwe", "Chewbacca", "Chewbacca", "Kashyyyk", null);
+		ApplicationUser user1 = new ApplicationUser("ch@me", "QWEqwe123", "Chewbacca", "Chewbacca", "Kashyyyk", null);
 		user1.setUserType(ApplicationUserType.VISITOR);
 		userService.add(user1);
 
-		ApplicationUser user2 = new ApplicationUser("rms@me", "qweqwe", "Richard", "Stallman", "New York", null);
+		ApplicationUser user2 = new ApplicationUser("rms@me", "QWEqwe123", "Richard", "Stallman", "New York", null);
 		user2.setUserType(ApplicationUserType.VISITOR);
 		userService.add(user2);
 
-		ApplicationUser user3 = new ApplicationUser("han@me", "qweqwe", "Han", "Solo", "Corellia", null);
+		ApplicationUser user3 = new ApplicationUser("han@me", "QWEqwe123", "Han", "Solo", "Corellia", null);
 		user3.setUserType(ApplicationUserType.AGENT);
 		user3.setPid("123456789");
 		userService.add(user3);
 
-		ApplicationUser user4 = new ApplicationUser("pot@me", "qweqwe", "Lennart", "Poettering", "Guatemala City", null);
+		ApplicationUser user4 = new ApplicationUser("pot@me", "QWEqwe123", "Lennart", "Poettering", "Guatemala City", null);
 		user4.setUserType(ApplicationUserType.AGENT);
 		user4.setPid("987654321");
 		userService.add(user4);
 
-		ApplicationUser user5 = new ApplicationUser("ben@me", "qweqwe", "Ben", "Solo", "Chandrila", null);
+		ApplicationUser user5 = new ApplicationUser("ben@me", "QWEqwe123", "Ben", "Solo", "Chandrila", null);
 		user5.setUserType(ApplicationUserType.ADMIN);
 		userService.add(user5);
 
-		ApplicationUser user6 = new ApplicationUser("an@me", "qweqwe", "Anakin", "Skywalker", "Tatooine", null);
+		ApplicationUser user6 = new ApplicationUser("an@me", "QWEqwe123", "Anakin", "Skywalker", "Tatooine", null);
 		user6.setUserType(ApplicationUserType.ADMIN);
 		userService.add(user6);
 
-		ApplicationUser user7 = new ApplicationUser("sys@me", "qweqwe", "Sheev", "Palpatine", "Naboo", null);
+		ApplicationUser user7 = new ApplicationUser("sys@me", "QWEqwe123", "Sheev", "Palpatine", "Naboo", null);
 		user7.setUserType(ApplicationUserType.ADMIN);
 		userService.add(user7);
 

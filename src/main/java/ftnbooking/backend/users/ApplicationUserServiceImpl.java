@@ -44,6 +44,9 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 		if(existing != null) // User already exists
 			return null;
 
+		if(!user.getPassword().matches("(?U)^(?=.*\\p{Lower})(?=.*\\p{Upper})(?=.*\\d).+$"))
+			return null;
+
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
