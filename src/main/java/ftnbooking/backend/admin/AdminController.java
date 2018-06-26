@@ -1,5 +1,6 @@
 package ftnbooking.backend.admin;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,20 +14,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.qos.logback.classic.Logger;
+import ftnbooking.backend.reservations.Reservation;
 import ftnbooking.backend.users.ApplicationUser;
 import ftnbooking.backend.users.ApplicationUserRepository;
+import ftnbooking.backend.users.ApplicationUserService;
 import ftnbooking.backend.users.ApplicationUserType;
 
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
-
+	
+	
+	
+	
 	@Autowired
 	private ApplicationUserRepository userRepository;
 	@Autowired
+	private ApplicationUserService userService;
+	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	@RequestMapping("/login")
+	/*@RequestMapping(method = RequestMethod.POST,value="/login")
 	public ResponseEntity<Long> login(@RequestBody ApplicationUser user) 
 	{
 		ApplicationUser existing = userRepository.findByEmail(user.getEmail());
@@ -44,11 +53,27 @@ public class AdminController {
 		
 		
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}*/
+	@RequestMapping(method = RequestMethod.GET,value="/login")
+	public ResponseEntity<String> checkIfAdmin(Principal principal) 
+	{
+		ApplicationUser user = userService.findOne(principal.getName());
+		if(user == null || user.getUserType()!=ApplicationUserType.ADMIN)
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<String>("ok", HttpStatus.OK);
+	
+		
+		
 	}
+	
+	
+	
 
 	@RequestMapping(method = RequestMethod.GET,value="/users")
-	public ResponseEntity<List<UserDTO>> getUsers() 
+	public ResponseEntity<List<UserDTO>> getUsers(Principal principal) 
 	{
+		
 		ArrayList<UserDTO> retVal = new ArrayList<UserDTO>(); 
 		for (ApplicationUser user : userRepository.findAll()) 
 		{
@@ -62,7 +87,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,value="/users")
-	public ResponseEntity<?> addUser(@RequestBody NewAccountDTO user) 
+	public ResponseEntity<?> addUser(@RequestBody NewAccountDTO user, Principal principal) 
 	{
 		ApplicationUser user1 = new ApplicationUser(user.getEmail(), "defaultPassword",user.getName(), user.getLastname(), user.getCity(), user.getPhone());
 		user1.setUserType(ApplicationUserType.AGENT);
@@ -73,7 +98,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,value="/users/{id:\\d+}")
-	public ResponseEntity<?> updateUser(@PathVariable Long id,@RequestBody UserDTO user ) 
+	public ResponseEntity<?> updateUser(@PathVariable Long id,@RequestBody UserDTO user, Principal principal) 
 	{
 		ApplicationUser existing = userRepository.findById(id).orElse(null);
 		
