@@ -16,6 +16,7 @@ public class PrivilegeData {
 	@PostConstruct
 	private void init() {
 		privilegeService.add(new Privilege("LIST_LODGINGS", ApplicationUserType.VISITOR));
+		privilegeService.add(new Privilege("GET_USER_BY_MAIL", ApplicationUserType.ADMIN));
 	}
 
 }

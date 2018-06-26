@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +38,7 @@ public class AuthenticationController {
 		return new ResponseEntity<>(registered, HttpStatus.OK);
 	}
 
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping
 	public ResponseEntity<ApplicationUser> getCurrentUser(Principal principal) {
 		ApplicationUser user = userService.findOne(principal.getName());
@@ -46,6 +48,7 @@ public class AuthenticationController {
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
+	@PreAuthorize("isAuthenticated()")
 	@PutMapping
 	public ResponseEntity<?> changePassword(Principal principal,
 			@RequestBody @Valid ChangePasswordDTO passwordDto) {
@@ -83,6 +86,7 @@ public class AuthenticationController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAuthority('GET_USER_BY_MAIL')")
 	@GetMapping("/{mail}")
 	public ResponseEntity<?> getUserByMail(@PathVariable String mail){
 		ApplicationUser user = userService.findOne(mail);
@@ -91,5 +95,5 @@ public class AuthenticationController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
-	
+
 }
