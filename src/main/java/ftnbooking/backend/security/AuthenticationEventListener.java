@@ -9,10 +9,13 @@ import org.springframework.stereotype.Component;
 
 import ftnbooking.backend.users.ApplicationUser;
 import ftnbooking.backend.users.ApplicationUserService;
+import ftnbooking.logging.LoggerManager;
 
 @Component
 public class AuthenticationEventListener {
 
+	@Autowired
+	private LoggerManager logger;
 	@Autowired
 	private ApplicationUserService applicationUserService;
 
@@ -20,6 +23,7 @@ public class AuthenticationEventListener {
 	public void authenticationFailed(AuthenticationFailureBadCredentialsEvent event) {
 		String email = (String) event.getAuthentication().getPrincipal();
 		ApplicationUser user = applicationUserService.findOne(email);
+		logger.logAdmin("AUTHENTICATION FAILED: ", email);
 		applicationUserService.failedLogin(user);
 	}
 
@@ -28,6 +32,7 @@ public class AuthenticationEventListener {
 		User principal = (User) event.getAuthentication().getPrincipal();
 		String email = principal.getUsername();
 		ApplicationUser user = applicationUserService.findOne(email);
+		logger.logAdmin("AUTHENTICATION SUCCEEDED: ", email);
 		applicationUserService.successfulLogin(user);
 	}
 
