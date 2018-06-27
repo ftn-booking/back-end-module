@@ -1,4 +1,7 @@
 /dbtest*
+/AdminLogs.txt
+/CustomerLogs.txt
+/AgentLogs.txt
 
 /target/
 !.mvn/wrapper/maven-wrapper.jar
