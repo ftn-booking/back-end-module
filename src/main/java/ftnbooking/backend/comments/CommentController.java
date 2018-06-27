@@ -19,11 +19,14 @@ import ftnbooking.backend.lodgings.LodgingService;
 import ftnbooking.backend.rating.RemoteCommentService;
 import ftnbooking.backend.users.ApplicationUser;
 import ftnbooking.backend.users.ApplicationUserService;
+import ftnbooking.logging.LoggerManager;
 
 @RestController
 @RequestMapping("/api/comments")
 public class CommentController {
-
+	
+	@Autowired
+	private LoggerManager logger;
 	@Autowired
 	private CommentService commentService;
 	@Autowired
@@ -59,6 +62,7 @@ public class CommentController {
 		Comment ret = commentService.add(comment);
 		if(ret == null)
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		logger.logAdmin("CREATED COMMENT: " + comment.getId(), principal.getName());
 		return new ResponseEntity<>(comment, HttpStatus.OK);
 	}
 

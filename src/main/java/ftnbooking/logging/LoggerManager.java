@@ -30,7 +30,20 @@ public class LoggerManager {
 
 	private void initializeCustomerLogger() {
 		// TODO Auto-generated method stub
-		
+		try
+		{
+			customerLogger = Logger.getLogger("Customer");
+			customerLogger.setLevel(Level.INFO);
+	        FileHandler fileTxt = new FileHandler("CustomerLogs.txt");
+	       
+	
+	        // create a TXT formatter
+	        
+	        customerLogger.addHandler(fileTxt);
+		}catch(Exception ex)
+		{
+			System.out.println("Failed to create customer logger;");
+		}
 	}
 
 
@@ -74,6 +87,25 @@ public class LoggerManager {
     	
     	
     	adminLogger.info(logMessage.toString());
+    	
+    }
+    
+    public void logCustomer(String message, String userEmail)
+    {
+    	StringBuilder logMessage = new StringBuilder();
+    	if(customerLogger==null)
+    		return;
+    	logMessage.append(new Date().toString());
+    	logMessage.append("/t/t");
+    	logMessage.append(userEmail);  
+    	logMessage.append("/t/t/t");
+    	logMessage.append(message);
+    	
+    	
+    	
+    	
+    	
+    	customerLogger.info(logMessage.toString());
     	
     }
 	

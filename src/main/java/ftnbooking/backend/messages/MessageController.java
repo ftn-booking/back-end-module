@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftnbooking.backend.users.ApplicationUser;
 import ftnbooking.backend.users.ApplicationUserService;
+import ftnbooking.logging.LoggerManager;
 
 @RestController
 @RequestMapping("/api/messages")
 public class MessageController {
 
+	@Autowired
+	private LoggerManager logger;
 	@Autowired
 	private MessageService messageService;
 	@Autowired
@@ -51,6 +54,7 @@ public class MessageController {
 		Message ret = messageService.add(message);
 		if(ret == null)
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		logger.logAdmin("CREATED MESSAGE: " + message.getId(), principal.getName());
 		return new ResponseEntity<>(message, HttpStatus.OK);
 	}
 

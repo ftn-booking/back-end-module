@@ -18,12 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ftnbooking.backend.EmailUtils;
+import ftnbooking.logging.LoggerManager;
 
 
 @RestController
 @RequestMapping("/api/authentication")
 public class AuthenticationController {
 
+	@Autowired
+	private LoggerManager logger;
 	@Autowired
 	private ApplicationUserService userService;
 	@Autowired
@@ -34,7 +37,7 @@ public class AuthenticationController {
 		ApplicationUser registered = userService.add(user);
 		if(registered == null)
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
-
+		logger.logAdmin("REGISTERED USER: " + registered.getId(), "VISITOR");
 		return new ResponseEntity<>(registered, HttpStatus.OK);
 	}
 
@@ -55,7 +58,7 @@ public class AuthenticationController {
 		boolean result = userService.changePassword(principal.getName(), passwordDto);
 		if(result)
 			return new ResponseEntity<>(HttpStatus.OK);
-
+		logger.logAdmin("PASSWORD CHANGED: ", principal.getName());
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 
@@ -65,6 +68,7 @@ public class AuthenticationController {
 		ApplicationUser user = userService.findOne(email);
 		if(user == null)
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		logger.logAdmin("PASSWORD RESETED: ", email);
 
 		emailUtils.sendEmail(email,
 				"Password recovery",
@@ -78,7 +82,7 @@ public class AuthenticationController {
 		ApplicationUser user = userService.findByResetToken(token);
 		if(user == null)
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
+		logger.logAdmin("PASSWORD RESETED: ", user.getEmail());
 		String newPassword = userService.resetPassword(user);
 		emailUtils.sendEmail(user.getEmail(),
 				"Password recovery",

@@ -19,11 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftnbooking.backend.users.ApplicationUser;
 import ftnbooking.backend.users.ApplicationUserService;
+import ftnbooking.logging.LoggerManager;
 
 @RestController
 @RequestMapping("/api/reservations")
 public class ReservationController {
 
+	@Autowired
+	private LoggerManager logger;
 	@Autowired
 	private ReservationService reservationService;
 	@Autowired
@@ -55,6 +58,7 @@ public class ReservationController {
 		Reservation reserved = reservationService.add(reservation);
 		if(reserved == null)
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		logger.logAdmin("CREATED RESERVATION: " + reservation.getId(), principal.getName());
 		return new ResponseEntity<>(reserved, HttpStatus.OK);
 	}
 
@@ -74,6 +78,7 @@ public class ReservationController {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		HashMap<String, Double> res = new HashMap<>();
 		res.put("newRating", ret);
+		logger.logAdmin("RESERVATION RATED: " + reservation.getId(), principal.getName());
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
 
@@ -90,6 +95,7 @@ public class ReservationController {
 		boolean ret = reservationService.delete(user, reservation);
 		if(!ret)
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		logger.logAdmin("RESERVATION DELETED: " + id, principal.getName());
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
