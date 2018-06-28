@@ -91,7 +91,7 @@ public class AdminController {
 	public ResponseEntity<?> addUser(@RequestBody NewAccountDTO user, Principal principal) 
 	{
 		
-		ApplicationUser user1 = new ApplicationUser(user.getEmail(), "defaultPassword",user.getName(), user.getLastname(), user.getCity(), user.getPhone());
+		ApplicationUser user1 = new ApplicationUser(user.getEmail(), user.getPassword(),user.getName(), user.getLastname(), user.getCity(), user.getPhone());
 		user1.setUserType(ApplicationUserType.AGENT);
 		user1.setPid(user.getPid());
 		userRepository.save(user1);		 

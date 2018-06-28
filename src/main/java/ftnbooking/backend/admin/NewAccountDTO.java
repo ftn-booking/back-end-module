@@ -3,6 +3,7 @@ package ftnbooking.backend.admin;
 public class NewAccountDTO {
 	private String email;
     private String name;
+    private String password;
     private String lastname;
     private String city;
     private String phone;
