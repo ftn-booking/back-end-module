@@ -71,6 +71,14 @@ public class NewAccountDTO {
 		this.pid = pid;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
     
 
     
