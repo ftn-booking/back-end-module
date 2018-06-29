@@ -16,7 +16,7 @@ public class PrivilegeData {
 	@PostConstruct
 	private void init() {
 		privilegeService.add(new Privilege("GET_USER_BY_MAIL", ApplicationUserType.ADMIN));
-
+		
 		privilegeService.add(new Privilege("GET_COMMENTS", ApplicationUserType.VISITOR));
 		privilegeService.add(new Privilege("ADD_COMMENT", ApplicationUserType.VISITOR));
 

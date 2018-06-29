@@ -67,8 +67,17 @@ public class LoggerManager {
 
 
 	private void initializeAgentLogger() {
-		// TODO Auto-generated method stub
-		
+		try
+		{
+			agentLogger = Logger.getLogger("Agent");
+			agentLogger.setLevel(Level.INFO);
+	        FileHandler fileTxt = new FileHandler("AgentLogs.txt");
+	        
+	        agentLogger.addHandler(fileTxt);
+		}catch(Exception ex)
+		{
+			System.out.println("Failed to create agent logger;");
+		}	
 	}
 
     public void logAdmin(String message, String userEmail)
@@ -77,9 +86,9 @@ public class LoggerManager {
     	if(adminLogger==null)
     		return;
     	logMessage.append(new Date().toString());
-    	logMessage.append("/t/t");
+    	logMessage.append("\t\t");
     	logMessage.append(userEmail);  
-    	logMessage.append("/t/t/t");
+    	logMessage.append("\t\t\t");
     	logMessage.append(message);
     	
     	
@@ -96,9 +105,9 @@ public class LoggerManager {
     	if(customerLogger==null)
     		return;
     	logMessage.append(new Date().toString());
-    	logMessage.append("/t/t");
+    	logMessage.append("\t\t");
     	logMessage.append(userEmail);  
-    	logMessage.append("/t/t/t");
+    	logMessage.append("\t\t\t");
     	logMessage.append(message);
     	
     	
@@ -109,7 +118,19 @@ public class LoggerManager {
     	
     }
 	
-	
+	public void logAgent(String message, String userEmail) {
+		StringBuilder logMessage = new StringBuilder();
+    	if(agentLogger==null)
+    		return;
+    	logMessage.append(new Date().toString());
+    	logMessage.append("\t\t");
+    	logMessage.append(userEmail);  
+    	logMessage.append("\t\t\t");
+    	logMessage.append(message);
+    	
+    	agentLogger.info(logMessage.toString());
+    	
+	}
 	
 	
 
